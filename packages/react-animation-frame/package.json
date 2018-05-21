@@ -2,7 +2,7 @@
   "name": "@wapps/react-animation-frame",
   "description": "React higher-order component for managing recurring animation frames",
   "repository": "hupe1980/wapps-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "license": "MIT",
   "files": [
