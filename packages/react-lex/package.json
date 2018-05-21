@@ -2,7 +2,8 @@
   "name": "@wapps/react-lex",
   "description": "React Amazon Lex interface",
   "repository": "hupe1980/wapps-components",
-  "version": "0.0.2",
+  "author": "hello@webappsolutions.de",
+  "version": "0.0.3",
   "main": "index.js",
   "license": "MIT",
   "files": [
