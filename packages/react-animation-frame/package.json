@@ -1,0 +1,17 @@
+{
+  "name": "@wapps/react-animation-frame",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "lib/**"
+  ],
+  "dependencies": {
+    "hoist-non-react-statics": "^2.5.0",
+    "prop-types": "^15.6.1"
+  },
+  "peerDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
+}
