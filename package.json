@@ -3,16 +3,18 @@
   "name": "wapps-components",
   "license": "MIT",
   "scripts": {
-    "prebuild": "lerna exec --parallel -- rimraf lib", 
+    "prebuild": "lerna exec --parallel -- rimraf lib",
     "build": "lerna exec --parallel -- babel src -d lib --ignore __tests__",
     "clean": "lerna clean",
     "format": "prettier-eslint --write \"packages/*/src/**/*.js\"",
     "storybook": "start-storybook -p 9001 -c .storybook",
+    "deploy-storybook": "storybook-to-ghpages",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@storybook/react": "^3.4.4",
+    "@storybook/storybook-deployer": "^2.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
