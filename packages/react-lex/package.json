@@ -4,7 +4,7 @@
   "repository": "hupe1980/wapps-components",
   "author": "hello@webappsolutions.de",
   "version": "0.0.4",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "files": [
     "lib/**"
