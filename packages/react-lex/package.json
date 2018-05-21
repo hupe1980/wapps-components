@@ -3,7 +3,7 @@
   "description": "React Amazon Lex interface",
   "repository": "hupe1980/wapps-components",
   "author": "hello@webappsolutions.de",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "MIT",
   "files": [
@@ -17,5 +17,8 @@
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
