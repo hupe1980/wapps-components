@@ -2,6 +2,13 @@
   "name": "@wapps/react-lex",
   "description": "React Amazon Lex interface",
   "repository": "hupe1980/wapps-components",
+  "keywords": [
+    "aws",
+    "lex",
+    "bot",
+    "chatbot",
+    "react"
+  ],
   "author": "hello@webappsolutions.de",
   "version": "0.0.5",
   "main": "lib/index.js",

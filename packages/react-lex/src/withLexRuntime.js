@@ -6,16 +6,19 @@ import { CognitoIdentityCredentials } from 'aws-sdk/global';
 
 const propTypes = {
   apiVersion: PropTypes.string,
+  credentials: PropTypes.object,
+  identityPoolId: PropTypes.string,
+  userId: PropTypes.string,
   region: PropTypes.string,
   botAlias: PropTypes.string,
   botName: PropTypes.string.isRequired,
-  userId: PropTypes.string,
-  identityPoolId: PropTypes.string.isRequired,
   options: PropTypes.object,
 };
 
 const defaultProps = {
   apiVersion: '2016-11-28',
+  credentials: null,
+  identityPoolId: '',
   region: 'us-east-1',
   botAlias: '$LATEST',
   userId: `user_${Math.floor((1 + Math.random()) * 0x10000)
@@ -36,14 +39,9 @@ const withLexRuntime = WrappedComponent => {
     }
 
     componentDidMount() {
-      const { apiVersion, region, identityPoolId } = this.props;
+      const { apiVersion, region } = this.props;
 
-      this.credentials = new CognitoIdentityCredentials(
-        {
-          IdentityPoolId: identityPoolId,
-        },
-        { region },
-      );
+      this.credentials = this.initCredentials();
 
       this.lexruntime = new AWSLexRuntime({
         apiVersion,
@@ -52,6 +50,19 @@ const withLexRuntime = WrappedComponent => {
         ...this.props.options,
       });
     }
+
+    initCredentials = () => {
+      const { credentials, identityPoolId, region } = this.props;
+
+      if (credentials) return credentials;
+
+      return new CognitoIdentityCredentials(
+        {
+          IdentityPoolId: identityPoolId,
+        },
+        { region },
+      );
+    };
 
     postText = (inputText, sessionAttributes = {}) => {
       const { botAlias, botName, userId } = this.props;
