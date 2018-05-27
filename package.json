@@ -10,11 +10,14 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
     "test": "jest --env=jsdom",
-    "test:watch": "jest --watch --env=jsdom"
+    "test:watch": "jest --watch --env=jsdom",
+    "prepublish": "yarn build",
+    "publish": "lerna publish"
   },
   "devDependencies": {
+    "@storybook/addon-options": "^3.4.6",
     "@storybook/addon-storyshots": "^3.4.6",
-    "@storybook/react": "^3.4.4",
+    "@storybook/react": "^3.4.6",
     "@storybook/storybook-deployer": "^2.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
@@ -50,6 +53,8 @@
     "setupFiles": [
       "./scripts/setupTests.js"
     ],
-    "testMatch": [ "**/?(*.)+(spec|test).js?(x)" ]
+    "testMatch": [
+      "**/?(*.)+(spec|test).js?(x)"
+    ]
   }
 }

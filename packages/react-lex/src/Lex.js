@@ -8,17 +8,17 @@ const propTypes = {
   initialText: PropTypes.string,
   onResponse: PropTypes.func,
   onError: PropTypes.func,
-  component: PropTypes.func,
+  children: PropTypes.node,
 };
 
 const defaultProps = {
   initialText: '',
   onResponse: null,
   onError: null,
-  component: null,
+  children: <Chat />,
 };
 
-class LexChat extends Component {
+class Lex extends Component {
   state = {
     inputText: '',
     messages: [],
@@ -62,23 +62,19 @@ class LexChat extends Component {
 
   render() {
     const { inputText, messages } = this.state;
-    const { component, ...rest } = this.props;
+    const { children, ...rest } = this.props;
 
-    const ChatComponent = component || Chat;
-
-    return (
-      <ChatComponent
-        inputText={inputText}
-        messages={messages}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit}
-        {...rest}
-      />
-    );
+    return React.cloneElement(children, {
+      inputText: inputText,
+      messages: messages,
+      onChange: this.handleChange,
+      onSubmit: this.handleSubmit,
+      ...rest,
+    });
   }
 }
 
-LexChat.propTypes = propTypes;
-LexChat.defaultProps = defaultProps;
+Lex.propTypes = propTypes;
+Lex.defaultProps = defaultProps;
 
-export default withLexRuntime(LexChat);
+export default withLexRuntime(Lex);
