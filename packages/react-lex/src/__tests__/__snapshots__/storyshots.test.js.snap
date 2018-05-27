@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots LexChat with BookTripBot 1`] = `
+<div>
+  <div>
+    <p>
+      Hello, what can I help you with?
+    </p>
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </form>
+</div>
+`;

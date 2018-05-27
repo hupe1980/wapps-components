@@ -60,7 +60,7 @@ class StartStop extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <canvas ref="canvas" width="500" height="200" />
+        <canvas ref="canvas" width="300" height="300" />
         <div style={styles.buttons}>
           <button onClick={this.start}>Start</button>
           <button onClick={this.stop}>Stop</button>

@@ -9,10 +9,11 @@
     "format": "prettier-eslint --write \"packages/*/src/**/*.js\"",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "deploy-storybook": "storybook-to-ghpages",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --env=jsdom",
+    "test:watch": "jest --watch --env=jsdom"
   },
   "devDependencies": {
+    "@storybook/addon-storyshots": "^3.4.6",
     "@storybook/react": "^3.4.4",
     "@storybook/storybook-deployer": "^2.3.0",
     "babel-cli": "^6.26.0",
@@ -48,6 +49,7 @@
   "jest": {
     "setupFiles": [
       "./scripts/setupTests.js"
-    ]
+    ],
+    "testMatch": [ "**/?(*.)+(spec|test).js?(x)" ]
   }
 }
