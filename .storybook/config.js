@@ -2,7 +2,7 @@ import { configure } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 
 setOptions({
-  name: 'wapps-components',
+  name: 'wapps',
   url: 'https://github.com/hupe1980/wapps-components',
 });
 

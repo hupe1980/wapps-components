@@ -1,20 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots LexChat with BookTripBot 1`] = `
-<div>
-  <div>
-    <p>
-      Hello, what can I help you with?
-    </p>
-  </div>
-  <form
-    onSubmit={[Function]}
+exports[`Storyshots Lex with BookTripBot 1`] = `
+<div
+  className="sc-EHOje ikYPee"
+>
+  <div
+    className="sc-bZQynM gGmxIh"
   >
-    <input
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-  </form>
+    <div
+      className="sc-htpNat cNiZJl"
+    >
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello, what can I help you with?
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bxivhb fZmUiV"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="sc-ifAKCX cZUZpM"
+          id="textInput"
+          onChange={[Function]}
+          placeholder="Type here"
+          type="text"
+          value=""
+        />
+      </form>
+    </div>
+  </div>
 </div>
 `;

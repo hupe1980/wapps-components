@@ -1,27 +1,22 @@
 {
-  "name": "@wapps/react-lex",
-  "description": "React Amazon Lex interface",
+  "name": "@wapps/react-scroll",
+  "description": "React scroll compoment",
   "repository": "hupe1980/wapps-components",
   "keywords": [
-    "aws",
-    "lex",
-    "bot",
-    "chatbot",
-    "react"
+    "react",
+    "scrollIntoView"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.0.8",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
   "dependencies": {
-    "@wapps/react-scroll": "^0.0.1",
-    "aws-sdk": "^2.243.1",
-    "hoist-non-react-statics": "^2.5.0",
     "prop-types": "^15.6.1",
-    "styled-components": "^3.3.0"
+    "scroll-into-view-if-needed": "^2.2.4",
+    "smooth-scroll-into-view-if-needed": "^1.1.5"
   },
   "peerDependencies": {
     "react": ">=16"

@@ -29,35 +29,42 @@ class Lex extends Component {
     const { messages } = this.state;
 
     if (initialText) {
-      messages.push({ type: 'bot', message: initialText });
+      messages.push({ type: 'bot', text: initialText });
       this.setState({ inputText: '', messages });
     }
   }
 
   handleSubmit = event => {
+    event.preventDefault();
     const { inputText, messages } = this.state;
-    const { onResponse, onError } = this.props;
+    const { onResponse, onError, postText } = this.props;
 
-    messages.push({ type: 'human', message: inputText });
+    if (!inputText) return;
+
+    messages.push({ type: 'human', text: inputText });
     this.setState({ inputText: '', messages });
-    this.props
-      .postText(inputText)
-      .then(data => {
-        const { message } = data;
 
-        messages.push({ type: 'bot', message });
+    postText(inputText)
+      .then(data => {
+        console.log(data);
+        const { dialogState, message, messageFormat } = data;
+
+        messages.push({
+          type: 'bot',
+          text: message,
+          format: messageFormat,
+          dialogState,
+        });
         this.setState({ messages });
 
         onResponse && onResponse(data);
       })
       .catch(error => onError && onError(error));
-
-    event.preventDefault();
   };
 
   handleChange = event => {
-    this.setState({ inputText: event.target.value });
     event.preventDefault();
+    this.setState({ inputText: event.target.value });
   };
 
   render() {
