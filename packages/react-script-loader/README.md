@@ -1,4 +1,5 @@
 # react-script-loader
+React script loader
 
 ## Example
 ```js
