@@ -1,0 +1,24 @@
+{
+  "name": "@wapps/react-script-loader",
+  "description": "React scroll compoment",
+  "repository": "hupe1980/wapps-components",
+  "keywords": [
+    "react"
+  ],
+  "author": "hello@webappsolutions.de",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**"
+  ],
+  "dependencies": {
+    "hoist-non-react-statics": "^2.5.0"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

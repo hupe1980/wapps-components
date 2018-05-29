@@ -1,8 +1,8 @@
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 
 setOptions({
-  name: 'wapps',
+  name: 'wapps-components',
   url: 'https://github.com/hupe1980/wapps-components',
 });
 
