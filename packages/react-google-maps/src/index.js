@@ -9,6 +9,8 @@ export { default as InfoWindow } from './InfoWindow';
 export { default as OverlayView } from './OverlayView';
 export { default as Polyline } from './Polyline';
 export { default as Polygon } from './Polygon';
+export { default as Rectangle } from './Rectangle';
+export { default as Circle } from './Circle';
 export { default as withGoogleMapsApi } from './withGoogleMapsApi';
 
 export default GoogleMaps;

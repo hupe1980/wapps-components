@@ -50,11 +50,11 @@ class Marker extends Component {
     if (this.marker) {
       this.marker.setMap(null);
       this.marker = null;
-    }
 
-    Object.keys(this.listeners).forEach(evtName => {
-      this.listeners[evtName].remove();
-    });
+      Object.keys(this.listeners).forEach(evtName => {
+        this.listeners[evtName].remove();
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {

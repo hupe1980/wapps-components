@@ -63,11 +63,11 @@ class Map extends Component {
   componentWillUnmount() {
     if (this.state.map) {
       this.setState({ map: null });
-    }
 
-    Object.keys(this.listeners).forEach(evtName => {
-      this.listeners[evtName].remove();
-    });
+      Object.keys(this.listeners).forEach(evtName => {
+        this.listeners[evtName].remove();
+      });
+    }
   }
 
   loadMap = () => {

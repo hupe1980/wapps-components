@@ -3,27 +3,28 @@ import { storiesOf } from '@storybook/react';
 
 import { Api, Container } from './helper';
 import Map from '../Map';
-import Polygon from '../Polygon';
+import Rectangle from '../Rectangle';
 
-// Define the LatLng coordinates for the polygon's path.
-const triangleCoords = [
-  { lat: 25.774, lng: -80.19 },
-  { lat: 18.466, lng: -66.118 },
-  { lat: 32.321, lng: -64.757 },
-  { lat: 25.774, lng: -80.19 },
-];
-
-storiesOf('Polygon', module).add('with Polygon', () => (
+storiesOf('Rectangle', module).add('with Rectangle', () => (
   <Api>
     <Container>
-      <Map center={{ lat: 24.886, lng: -70.268 }} zoom={5} mapTypeId="terrain">
-        <Polygon
-          path={triangleCoords}
+      <Map
+        center={{ lat: 33.678, lng: -116.243 }}
+        zoom={11}
+        mapTypeId="terrain"
+      >
+        <Rectangle
           strokeColor="#FF0000"
           strokeOpacity={0.8}
           strokeWeight={2}
           fillColor="#FF0000"
           fillOpacity={0.35}
+          bounds={{
+            north: 33.685,
+            south: 33.671,
+            east: -116.234,
+            west: -116.251,
+          }}
         />
       </Map>
     </Container>

@@ -1,6 +1,6 @@
 import createShape from './createShape';
 import { withMapContext } from './Context';
 
-const Rectangle = createShape('Rectangle');
+const Circle = createShape('Circle');
 
-export default withMapContext(Rectangle);
+export default withMapContext(Circle);

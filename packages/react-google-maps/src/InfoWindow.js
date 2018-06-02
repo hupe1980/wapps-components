@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import { camelize } from './utils';
 import { withMapContext } from './Context';
+
+const evtNames = [
+  'closeclick',
+  'content_changed',
+  'domready',
+  'position_changed',
+  'zindex_changed',
+];
 
 class InfoWindow extends Component {
   constructor(props) {
     super(props);
 
+    this.listeners = {};
     this.containerElement = document.createElement('div');
   }
 
@@ -38,6 +48,10 @@ class InfoWindow extends Component {
     if (this.infoWindow) {
       this.infoWindow.setMap(null);
       this.infowWindow = null;
+
+      Object.keys(this.listeners).forEach(evtName => {
+        this.listeners[evtName].remove();
+      });
     }
   }
 
@@ -55,20 +69,8 @@ class InfoWindow extends Component {
     this.infoWindow.close();
   }
 
-  onOpen() {
-    if (this.props.onOpen) {
-      this.props.onOpen();
-    }
-  }
-
-  onClose() {
-    if (this.props.onClose) {
-      this.props.onClose();
-    }
-  }
-
   renderInfoWindow() {
-    const { api, disableAutoPan, open, position } = this.props;
+    const { api, open, position, ...rest } = this.props;
 
     if (!api) {
       return;
@@ -83,15 +85,26 @@ class InfoWindow extends Component {
 
     this.infoWindow = new api.InfoWindow({
       content: this.containerElement,
-      disableAutoPan,
       position: pos,
+      ...rest,
     });
 
-    this.infoWindow.addListener('closeclick', this.onClose.bind(this));
-    this.infoWindow.addListener('domready', this.onOpen.bind(this));
+    evtNames.forEach(evtName => {
+      this.listeners[evtName] = this.infoWindow.addListener(
+        evtName,
+        this.handleEvent(evtName),
+      );
+    });
 
     if (open) this.openWindow();
   }
+
+  handleEvent = evtName => event => {
+    const handlerName = camelize(`on_${evtName}`);
+    if (this.props[handlerName]) {
+      this.props[handlerName](this.infoWindow, event);
+    }
+  };
 
   render() {
     return ReactDOM.createPortal(
