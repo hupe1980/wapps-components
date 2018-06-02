@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import { Api, Container } from './helper';
 import Map from '../Map';
@@ -13,6 +14,14 @@ const Row = ({ children }) => (
 const Cell = ({ children }) => (
   <div style={{ width: '50%', margin: '5px' }}>{children}</div>
 );
+
+const mapStyles = [
+  {
+    featureType: 'poi',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+];
 
 storiesOf('Map', module)
   .add('with Map', () => (
@@ -50,5 +59,33 @@ storiesOf('Map', module)
           />
         </Cell>
       </Row>
+    </Api>
+  ))
+  .add('with onClick', () => (
+    <Api>
+      <Container>
+        <Map
+          center={{
+            lat: 52.520008,
+            lng: 13.404954,
+          }}
+          zoom={15}
+          onClick={action('onClick')}
+        />
+      </Container>
+    </Api>
+  ))
+  .add('with mapStyles', () => (
+    <Api>
+      <Container>
+        <Map
+          center={{
+            lat: 52.520008,
+            lng: 13.404954,
+          }}
+          zoom={15}
+          styles={mapStyles}
+        />
+      </Container>
     </Api>
   ));
