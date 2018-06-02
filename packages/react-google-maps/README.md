@@ -1,4 +1,4 @@
-# react-scroll
+# react-google-maps
 React google maps component
 
 ## Example
