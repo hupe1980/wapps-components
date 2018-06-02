@@ -1,25 +1,26 @@
 {
-  "name": "@wapps/react-scroll",
-  "description": "React scroll component",
+  "name": "@wapps/react-google-maps",
+  "description": "React google maps component",
   "repository": "hupe1980/wapps-components",
   "keywords": [
     "react",
-    "scrollIntoView"
+    "google-maps"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
   "dependencies": {
+    "@wapps/react-script-loader": "^0.0.3",
     "prop-types": "^15.6.1",
-    "scroll-into-view-if-needed": "^2.2.4",
-    "smooth-scroll-into-view-if-needed": "^1.1.5"
+    "hoist-non-react-statics": "^2.5.0"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   },
   "publishConfig": {
     "access": "public"

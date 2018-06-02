@@ -4,6 +4,8 @@ import { setOptions } from '@storybook/addon-options';
 setOptions({
   name: 'wapps-components',
   url: 'https://github.com/hupe1980/wapps-components',
+  showAddonPanel: true,
+  showSearchBox: false,
 });
 
 const loadStories = () => {

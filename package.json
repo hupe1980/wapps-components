@@ -5,6 +5,7 @@
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf lib",
     "build": "lerna exec --parallel -- babel src -d lib --ignore __tests__",
+    "build:watch": "lerna exec --parallel -- babel src -d lib --ignore __tests__ --watch",
     "clean": "lerna clean",
     "format": "prettier-eslint --write \"packages/*/src/**/*.js\"",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -15,6 +16,7 @@
     "publish": "lerna publish"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.6",
     "@storybook/addon-options": "^3.4.6",
     "@storybook/addon-storyshots": "^3.4.6",
     "@storybook/react": "^3.4.6",

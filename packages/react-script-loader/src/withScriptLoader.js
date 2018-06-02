@@ -7,13 +7,24 @@ const getDisplayName = name => `withScriptLoader(${name})`;
 
 const withScriptLoader = (...scripts) => WrappedComponent => {
   class ScriptLoader extends Component {
-    state = {
-      scriptsLoaded: false,
-      scriptsLoadedSuccessfully: false,
-    };
+    constructor(props) {
+      super(props);
+
+      this._isMounted = false;
+
+      this.state = {
+        hasScriptsLoaded: false,
+        hasScriptsLoadedSuccessfully: false,
+      };
+    }
 
     componentDidMount() {
+      this._isMounted = true;
       this.loadScripts(scripts);
+    }
+
+    componentWillUnmount() {
+      this._isMounted = false;
     }
 
     loadScripts = scripts => {
@@ -24,16 +35,18 @@ const withScriptLoader = (...scripts) => WrappedComponent => {
 
       Promise.all(promises)
         .then(() => {
-          this.setState({
-            scriptsLoaded: true,
-            scriptsLoadedSuccessfully: true,
-          });
+          this._isMounted &&
+            this.setState({
+              hasScriptsLoaded: true,
+              hasScriptsLoadedSuccessfully: true,
+            });
         })
         .catch(() => {
-          this.setState({
-            scriptsLoaded: true,
-            scriptsLoadedSuccessfully: false,
-          });
+          this._isMounted &&
+            this.setState({
+              hasScriptsLoaded: true,
+              hasScriptsLoadedSuccessfully: false,
+            });
         });
     };
 

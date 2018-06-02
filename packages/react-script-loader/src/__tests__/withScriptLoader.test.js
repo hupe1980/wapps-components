@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import withScriptLoader from '../withScriptLoader';
 

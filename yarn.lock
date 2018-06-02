@@ -16,7 +16,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@storybook/addon-actions@3.4.6":
+"@storybook/addon-actions@3.4.6", "@storybook/addon-actions@^3.4.6":
   version "3.4.6"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-3.4.6.tgz#70ca84a4754ea2969640428890d9a3c9369261f6"
   dependencies:
