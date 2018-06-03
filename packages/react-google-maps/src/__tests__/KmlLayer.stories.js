@@ -5,7 +5,7 @@ import { Api, Container } from './helper';
 import Map from '../Map';
 import KmlLayer from '../KmlLayer';
 
-storiesOf('KmlLayer', module).add('with KmlLayer', () => (
+storiesOf('react-google-maps|KmlLayer', module).add('default', () => (
   <Api>
     <Container>
       <Map center={{ lat: 41.876, lng: -87.624 }} zoom={11}>

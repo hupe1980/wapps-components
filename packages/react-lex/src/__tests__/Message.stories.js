@@ -13,6 +13,6 @@ const humanMessage = {
   text: 'Hello Bot!',
 };
 
-storiesOf('Message', module)
+storiesOf('react-lex|Message', module)
   .add('with botMessage', () => <Message {...botMessage} />)
   .add('with humanMessage', () => <Message {...humanMessage} />);

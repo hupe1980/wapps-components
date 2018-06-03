@@ -6,8 +6,8 @@ import { Api, Container } from './helper';
 import Map from '../Map';
 import Marker from '../Marker';
 
-storiesOf('Marker', module)
-  .add('with Marker', () => (
+storiesOf('react-google-maps|Marker', module)
+  .add('default', () => (
     <Api>
       <Container>
         <Map

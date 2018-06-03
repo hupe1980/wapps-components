@@ -16,7 +16,7 @@ const flightPlanCoordinates = [
   { lat: -27.467, lng: 153.027 },
 ];
 
-storiesOf('Polyline', module).add('with Polyline', () => (
+storiesOf('react-google-maps|Polyline', module).add('default', () => (
   <Api>
     <Container>
       <Map center={{ lat: 0, lng: -180 }} zoom={3} mapTypeId="terrain">

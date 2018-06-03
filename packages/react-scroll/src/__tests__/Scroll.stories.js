@@ -10,7 +10,7 @@ while (index < 200) {
   index++;
 }
 
-storiesOf('Scroll', module)
+storiesOf('react-scroll|Scroll', module)
   .add('with behavior smooth', () => (
     <div style={{ overflow: 'scroll' }}>
       {messages.map((message, index) => (

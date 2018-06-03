@@ -4,7 +4,22 @@
   "repository": "hupe1980/wapps-components",
   "keywords": [
     "react",
-    "google-maps"
+    "react-component",
+    "react-google-maps",
+    "google-maps",
+    "BicyclingLayer",
+    "Circle",
+    "GoogleMaps",
+    "InfoWindow",
+    "KmlLayer",
+    "Map",
+    "Marker",
+    "OverlayView",
+    "Polygon",
+    "Polyline",
+    "Rectangle",
+    "TrafficLayer",
+    "TransitLayer"
   ],
   "author": "hello@webappsolutions.de",
   "version": "0.0.5",

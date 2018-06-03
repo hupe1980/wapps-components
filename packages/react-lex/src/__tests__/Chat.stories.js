@@ -27,6 +27,6 @@ const withPreventDefault = handler => e => {
   handler(e);
 };
 
-storiesOf('Chat', module).add('with Messages', () => (
+storiesOf('react-lex|Chat', module).add('with Messages', () => (
   <Chat onSubmit={withPreventDefault(action('onSubmit'))} messages={messages} />
 ));

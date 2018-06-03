@@ -5,7 +5,7 @@ import { Api, Container } from './helper';
 import Map from '../Map';
 import OverlayView from '../OverlayView';
 
-storiesOf('OverlayView', module).add('with OverlayView', () => (
+storiesOf('react-google-maps|OverlayView', module).add('default', () => (
   <Api>
     <Container>
       <Map

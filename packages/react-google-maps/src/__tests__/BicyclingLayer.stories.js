@@ -5,7 +5,7 @@ import { Api, Container } from './helper';
 import Map from '../Map';
 import BicyclingLayer from '../BicyclingLayer';
 
-storiesOf('BicyclingLayer', module).add('with BicyclingLayer', () => (
+storiesOf('react-google-maps|BicyclingLayer', module).add('default', () => (
   <Api>
     <Container>
       <Map

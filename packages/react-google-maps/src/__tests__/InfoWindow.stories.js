@@ -43,7 +43,7 @@ class Wrapper extends Component {
   }
 }
 
-storiesOf('InfoWindow', module)
+storiesOf('react-google-maps|InfoWindow', module)
   .add('with Marker', () => (
     <Api>
       <Container>

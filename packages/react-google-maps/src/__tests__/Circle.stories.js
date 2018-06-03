@@ -32,7 +32,7 @@ const citymap = [
   },
 ];
 
-storiesOf('Circle', module).add('with Circle', () => (
+storiesOf('react-google-maps|Circle', module).add('default', () => (
   <Api>
     <Container>
       <Map center={{ lat: 37.09, lng: -95.712 }} zoom={4} mapTypeId="terrain">

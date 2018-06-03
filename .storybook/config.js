@@ -6,6 +6,8 @@ setOptions({
   url: 'https://github.com/hupe1980/wapps-components',
   showAddonPanel: true,
   showSearchBox: false,
+  hierarchySeparator: /\/|\./,
+  hierarchyRootSeparator: /\|/,
 });
 
 const loadStories = () => {

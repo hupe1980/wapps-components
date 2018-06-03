@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Lex from '../Lex';
 
-storiesOf('Lex', module).add('with BookTripBot', () => (
+storiesOf('react-lex|Lex', module).add('with BookTripBot', () => (
   <Lex
     botName="BookTrip"
     identityPoolId={process.env.REACT_LEX_IDENTITY_POOL_ID}

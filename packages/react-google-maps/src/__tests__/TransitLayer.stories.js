@@ -5,7 +5,7 @@ import { Api, Container } from './helper';
 import Map from '../Map';
 import TransitLayer from '../TransitLayer';
 
-storiesOf('TransitLayer', module).add('with TransitLayer', () => (
+storiesOf('react-google-maps|TransitLayer', module).add('default', () => (
   <Api>
     <Container>
       <Map

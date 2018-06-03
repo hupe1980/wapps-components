@@ -23,8 +23,8 @@ const mapStyles = [
   },
 ];
 
-storiesOf('Map', module)
-  .add('with Map', () => (
+storiesOf('react-google-maps|Map', module)
+  .add('default', () => (
     <Api>
       <Container>
         <Map
