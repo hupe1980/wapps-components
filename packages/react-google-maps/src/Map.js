@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize } from './utils';
+import { camelize, noop } from './utils';
 import { MapContext, withApiContext } from './Context';
 
 const propTypes = {
@@ -10,10 +10,15 @@ const propTypes = {
   center: PropTypes.object.isRequired,
   /** The initial Map zoom level. */
   zoom: PropTypes.number.isRequired,
+  mapRef: PropTypes.func,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  panTo: null,
+  mapRef: noop,
+};
 
+/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
 const evtNames = [
   'bounds_changed',
   'center_changed',
@@ -34,6 +39,17 @@ const evtNames = [
   'zoom_changed',
 ];
 
+const updatablePropertyNames = [
+  'center',
+  'clickableIcons',
+  'heading',
+  'mapTypeId',
+  'options',
+  'streetView',
+  'tilt',
+  'zoom',
+];
+
 class Map extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +59,7 @@ class Map extends Component {
     };
 
     this.listeners = {};
-    this.mapRef = React.createRef();
+    this.nodeRef = React.createRef();
   }
 
   componentDidMount() {
@@ -51,33 +67,39 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { api, ...rest } = this.props;
+    if (!this.state.map) return this.loadMap();
 
-    if (!this.state.map) {
-      this.loadMap();
-    } else {
-      this.state.map.setOptions(rest);
-    }
+    updatablePropertyNames.forEach(name => {
+      if (this.props[name] !== prevProps[name]) {
+        const func = camelize(`set_${name}`);
+
+        if (typeof this.state.map[func] === 'function') {
+          return this.state.map[func](this.props[name]);
+        }
+
+        throw Error(`There is no method named ${func}!`);
+      }
+    });
   }
 
   componentWillUnmount() {
     if (this.state.map) {
       this.setState({ map: null });
-
-      Object.keys(this.listeners).forEach(evtName => {
-        this.listeners[evtName].remove();
-      });
     }
+
+    Object.keys(this.listeners).forEach(evtName => {
+      this.listeners[evtName].remove();
+    });
   }
 
   loadMap = () => {
-    const { api, ...rest } = this.props;
+    const { api, mapRef, ...rest } = this.props;
 
     if (!api) {
       return;
     }
 
-    const node = this.mapRef.current;
+    const node = this.nodeRef.current;
 
     const map = new api.Map(node, {
       ...rest,
@@ -90,7 +112,9 @@ class Map extends Component {
       );
     });
 
-    this.setState({ map });
+    mapRef(map);
+
+    this.setState({ map }, () => {});
   };
 
   handleEvent = evtName => event => {
@@ -106,7 +130,7 @@ class Map extends Component {
 
     return (
       <MapContext.Provider value={map}>
-        <div style={{ height: '100%' }} ref={this.mapRef} role="application">
+        <div style={{ height: '100%' }} ref={this.nodeRef} role="application">
           Loading map...
         </div>
         {children}

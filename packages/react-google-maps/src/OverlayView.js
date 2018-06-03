@@ -11,7 +11,6 @@ class OverlayView extends Component {
   componentWillUnmount() {
     if (this.overlayView) {
       this.overlayView.setMap(null);
-      this.overlayView = null;
     }
   }
 

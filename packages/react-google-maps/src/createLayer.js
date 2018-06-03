@@ -9,7 +9,6 @@ const createLayer = type => props => {
     componentWillUnmount() {
       if (this.layer) {
         this.layer.setMap(null);
-        this.layer = null;
       }
     }
 

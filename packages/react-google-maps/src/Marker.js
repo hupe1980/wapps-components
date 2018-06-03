@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize } from './utils';
+import { camelize, noop } from './utils';
 import { withMapContext } from './Context';
 
 const propTypes = {
@@ -9,6 +9,11 @@ const propTypes = {
   animation: PropTypes.oneOf(['bounce', 'drop']),
   /** Marker position. */
   position: PropTypes.object.isRequired,
+  markerRef: PropTypes.func,
+};
+
+const defaultProps = {
+  markerRef: noop,
 };
 
 const evtNames = [
@@ -35,6 +40,23 @@ const evtNames = [
   'zindex_changed',
 ];
 
+const updatablePropertyNames = [
+  'animation',
+  'clickable',
+  'cursor',
+  'draggable',
+  'icon',
+  'label',
+  'map',
+  'opacity',
+  'options',
+  'position',
+  'shape',
+  'title',
+  'visible',
+  'zIndex',
+];
+
 class Marker extends Component {
   constructor(props) {
     super(props);
@@ -49,27 +71,27 @@ class Marker extends Component {
   componentWillUnmount() {
     if (this.marker) {
       this.marker.setMap(null);
-      this.marker = null;
-
-      Object.keys(this.listeners).forEach(evtName => {
-        this.listeners[evtName].remove();
-      });
     }
+
+    Object.keys(this.listeners).forEach(evtName => {
+      this.listeners[evtName].remove();
+    });
   }
 
   componentDidUpdate(prevProps) {
-    if (
-      this.props.api !== prevProps.api ||
-      this.props.map !== prevProps.map ||
-      this.props.position !== prevProps.position ||
-      this.props.animation !== prevProps.animation ||
-      this.props.icon !== prevProps.icon
-    ) {
-      if (this.marker) {
-        this.marker.setMap(null);
+    if (!this.marker) return this.renderMarker();
+
+    updatablePropertyNames.forEach(name => {
+      if (this.props[name] !== prevProps[name]) {
+        const func = camelize(`set_${name}`);
+
+        if (typeof this.marker[func] === 'function') {
+          return this.marker[func](this.props[name]);
+        }
+
+        throw Error(`There is no method named ${func}!`);
       }
-      this.renderMarker();
-    }
+    });
   }
 
   renderMarker = () => {
@@ -108,13 +130,13 @@ class Marker extends Component {
       );
     });
 
-    if (markerRef) markerRef(this.marker);
+    markerRef(this.marker);
   };
 
   handleEvent = evtName => event => {
     const handlerName = camelize(`on_${evtName}`);
     if (this.props[handlerName]) {
-      this.props[handlerName](this.marker, event);
+      this.props[handlerName](this.marker, this.props.map, event);
     }
   };
 
@@ -124,5 +146,6 @@ class Marker extends Component {
 }
 
 Marker.propTypes = propTypes;
+Marker.defaultProps = defaultProps;
 
 export default withMapContext(Marker);

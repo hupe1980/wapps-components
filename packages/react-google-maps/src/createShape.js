@@ -9,7 +9,6 @@ const createShape = type => props => {
     componentWillUnmount() {
       if (this.shape) {
         this.shape.setMap(null);
-        this.shape = null;
       }
     }
 

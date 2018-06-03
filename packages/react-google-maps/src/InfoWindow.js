@@ -47,12 +47,11 @@ class InfoWindow extends Component {
   componentWillUnmount() {
     if (this.infoWindow) {
       this.infoWindow.setMap(null);
-      this.infowWindow = null;
-
-      Object.keys(this.listeners).forEach(evtName => {
-        this.listeners[evtName].remove();
-      });
     }
+
+    Object.keys(this.listeners).forEach(evtName => {
+      this.listeners[evtName].remove();
+    });
   }
 
   updatePosition() {
