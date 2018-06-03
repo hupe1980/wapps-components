@@ -1,5 +1,5 @@
 import initStoryshots from '@storybook/addon-storyshots';
 
 initStoryshots({
-  storyKindRegex: /^Lex$/,
+  storyKindRegex: /^react-lex|(Lex|Chat|Message)$/,
 });

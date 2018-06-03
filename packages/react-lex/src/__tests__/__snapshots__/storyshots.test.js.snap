@@ -1,6 +1,517 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Lex with BookTripBot 1`] = `
+exports[`Storyshots react-lex|Chat with Messages 1`] = `
+<div
+  className="sc-EHOje ikYPee"
+>
+  <div
+    className="sc-bZQynM gGmxIh"
+  >
+    <div
+      className="sc-htpNat cNiZJl"
+    >
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH cTAZJH"
+          type="bot"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Human!
+          </p>
+        </div>
+      </div>
+      <div>
+        <div
+          className="sc-bwzfXH ibBxMu"
+          type="human"
+        >
+          <p
+            className="sc-bdVaJa bcSwbK"
+          >
+            Hello Bot!
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bxivhb fZmUiV"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="sc-ifAKCX cZUZpM"
+          id="textInput"
+          onChange={undefined}
+          placeholder={undefined}
+          type="text"
+          value={undefined}
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots react-lex|Lex with BookTripBot 1`] = `
 <div
   className="sc-EHOje ikYPee"
 >
@@ -40,5 +551,31 @@ exports[`Storyshots Lex with BookTripBot 1`] = `
       </form>
     </div>
   </div>
+</div>
+`;
+
+exports[`Storyshots react-lex|Message with botMessage 1`] = `
+<div
+  className="sc-bwzfXH cTAZJH"
+  type="bot"
+>
+  <p
+    className="sc-bdVaJa bcSwbK"
+  >
+    Hello Human!
+  </p>
+</div>
+`;
+
+exports[`Storyshots react-lex|Message with humanMessage 1`] = `
+<div
+  className="sc-bwzfXH ibBxMu"
+  type="human"
+>
+  <p
+    className="sc-bdVaJa bcSwbK"
+  >
+    Hello Bot!
+  </p>
 </div>
 `;

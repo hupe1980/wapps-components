@@ -1,5 +1,5 @@
 import initStoryshots from '@storybook/addon-storyshots';
 
 initStoryshots({
-  storyKindRegex: /^Scroll$/,
+  storyKindRegex: /^react-scroll|(Scroll)$/,
 });

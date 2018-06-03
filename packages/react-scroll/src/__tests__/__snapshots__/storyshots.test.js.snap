@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Scroll with behavior instant 1`] = `
+exports[`Storyshots react-scroll|Scroll with behavior instant 1`] = `
 <div
   style={
     Object {
@@ -1211,7 +1211,7 @@ exports[`Storyshots Scroll with behavior instant 1`] = `
 </div>
 `;
 
-exports[`Storyshots Scroll with behavior smooth 1`] = `
+exports[`Storyshots react-scroll|Scroll with behavior smooth 1`] = `
 <div
   style={
     Object {
