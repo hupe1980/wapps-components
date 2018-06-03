@@ -142,6 +142,8 @@ class Marker extends Component {
   };
 
   render() {
+    if (!this.props.children) return null;
+
     const children = React.cloneElement(this.props.children, {
       marker: this.marker,
     });

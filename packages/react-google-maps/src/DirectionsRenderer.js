@@ -19,6 +19,4 @@ const DirectionsRenderer = createEntity(
   updatablePropertyNames,
 );
 
-const Test = withDirectionsService(DirectionsRenderer);
-
-export default withMapContext(Test);
+export default withMapContext(withDirectionsService(DirectionsRenderer));
