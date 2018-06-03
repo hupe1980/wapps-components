@@ -1,5 +1,6 @@
 import GoogleMaps from './GoogleMaps';
 
+export { default as DirectionsRenderer } from './DirectionsRenderer';
 export { default as Map } from './Map';
 export { default as Marker } from './Marker';
 export { default as TrafficLayer } from './TrafficLayer';

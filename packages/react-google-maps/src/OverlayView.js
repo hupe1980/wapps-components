@@ -55,7 +55,6 @@ class OverlayView extends Component {
   onRemove() {
     if (this.div) {
       this.div.parentNode.removeChild(this.div);
-      this.div = null;
     }
   }
 

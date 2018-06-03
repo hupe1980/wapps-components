@@ -10,12 +10,12 @@ const propTypes = {
   center: PropTypes.object.isRequired,
   /** The initial Map zoom level. */
   zoom: PropTypes.number.isRequired,
-  mapRef: PropTypes.func,
+  entityRef: PropTypes.func,
 };
 
 const defaultProps = {
   panTo: null,
-  mapRef: noop,
+  entityRef: noop,
 };
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
@@ -74,10 +74,10 @@ class Map extends Component {
         const func = camelize(`set_${name}`);
 
         if (typeof this.state.map[func] === 'function') {
-          return this.state.map[func](this.props[name]);
+          this.state.map[func](this.props[name]);
+        } else {
+          throw Error(`There is no method named ${func}!`);
         }
-
-        throw Error(`There is no method named ${func}!`);
       }
     });
   }
@@ -93,7 +93,7 @@ class Map extends Component {
   }
 
   loadMap = () => {
-    const { api, mapRef, ...rest } = this.props;
+    const { api, entityRef, ...rest } = this.props;
 
     if (!api) {
       return;
@@ -112,7 +112,7 @@ class Map extends Component {
       );
     });
 
-    mapRef(map);
+    entityRef(map);
 
     this.setState({ map }, () => {});
   };
@@ -126,14 +126,14 @@ class Map extends Component {
 
   render() {
     const { map } = this.state;
-    const { children } = this.props;
+    const { api, children } = this.props;
 
     return (
       <MapContext.Provider value={map}>
         <div style={{ height: '100%' }} ref={this.nodeRef} role="application">
           Loading map...
         </div>
-        {children}
+        {api && children}
       </MapContext.Provider>
     );
   }

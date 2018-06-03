@@ -1,6 +1,30 @@
-import createShape from './createShape';
+import createEntity from './createEntity';
 import { withMapContext } from './Context';
 
-const Rectangle = createShape('Rectangle');
+/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Polyline */
+const evtNames = [
+  'click',
+  'dblclick',
+  'drag',
+  'dragend',
+  'dragstart',
+  'mousedown',
+  'mousemove',
+  'mouseout',
+  'mouseover',
+  'mouseup',
+  'rightclick',
+];
 
-export default withMapContext(Rectangle);
+const updatablePropertyNames = [
+  'draggable',
+  'editable',
+  'map',
+  'options',
+  'path',
+  'visible',
+];
+
+const Polyline = createEntity('Polyline', evtNames, updatablePropertyNames);
+
+export default withMapContext(Polyline);

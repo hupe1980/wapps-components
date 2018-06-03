@@ -1,47 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import { Api, Container } from './helper';
 import Map from '../Map';
 import Marker from '../Marker';
 import InfoWindow from '../InfoWindow';
-
-let marker = null;
-
-class Wrapper extends Component {
-  state = {
-    marker: null,
-  };
-
-  render() {
-    return (
-      <Api>
-        <Container>
-          <Map
-            center={{
-              lat: 52.520008,
-              lng: 13.404954,
-            }}
-            zoom={15}
-          >
-            <Marker
-              position={{
-                lat: 52.520008,
-                lng: 13.404954,
-              }}
-              markerRef={marker => this.setState({ marker })}
-            />
-            {this.state.marker && (
-              <InfoWindow open marker={this.state.marker}>
-                <div>Hello World!</div>
-              </InfoWindow>
-            )}
-          </Map>
-        </Container>
-      </Api>
-    );
-  }
-}
 
 storiesOf('react-google-maps|InfoWindow', module)
   .add('with Marker', () => (
@@ -59,11 +22,11 @@ storiesOf('react-google-maps|InfoWindow', module)
               lat: 52.520008,
               lng: 13.404954,
             }}
-            markerRef={ref => (marker = ref)}
-          />
-          <InfoWindow open marker={marker}>
-            <div>Hello World!</div>
-          </InfoWindow>
+          >
+            <InfoWindow open>
+              <div>Hello World!</div>
+            </InfoWindow>
+          </Marker>
         </Map>
       </Container>
     </Api>

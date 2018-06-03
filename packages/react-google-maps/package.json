@@ -9,6 +9,8 @@
     "google-maps",
     "BicyclingLayer",
     "Circle",
+    "DirectionsRenderer",
+    "DirectionsService",
     "GoogleMaps",
     "InfoWindow",
     "KmlLayer",

@@ -52,8 +52,8 @@ storiesOf('react-google-maps|Map', module)
         <Cell>
           <Map
             center={{
-              lat: 52.520008,
-              lng: 13.404954,
+              lat: 37.3322412,
+              lng: -122.0110066,
             }}
             zoom={15}
           />

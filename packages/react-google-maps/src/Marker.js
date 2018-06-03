@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { camelize, noop } from './utils';
@@ -9,11 +9,12 @@ const propTypes = {
   animation: PropTypes.oneOf(['bounce', 'drop']),
   /** Marker position. */
   position: PropTypes.object.isRequired,
-  markerRef: PropTypes.func,
+  entityRef: PropTypes.func,
+  children: PropTypes.node,
 };
 
 const defaultProps = {
-  markerRef: noop,
+  entityRef: noop,
 };
 
 const evtNames = [
@@ -86,16 +87,16 @@ class Marker extends Component {
         const func = camelize(`set_${name}`);
 
         if (typeof this.marker[func] === 'function') {
-          return this.marker[func](this.props[name]);
+          this.marker[func](this.props[name]);
+        } else {
+          throw Error(`There is no method named ${func}!`);
         }
-
-        throw Error(`There is no method named ${func}!`);
       }
     });
   }
 
   renderMarker = () => {
-    const { api, animation, position, markerRef, ...rest } = this.props;
+    const { api, animation, position, entityRef, ...rest } = this.props;
 
     if (!api) {
       return;
@@ -130,7 +131,7 @@ class Marker extends Component {
       );
     });
 
-    markerRef(this.marker);
+    entityRef(this.marker);
   };
 
   handleEvent = evtName => event => {
@@ -141,7 +142,10 @@ class Marker extends Component {
   };
 
   render() {
-    return null;
+    const children = React.cloneElement(this.props.children, {
+      marker: this.marker,
+    });
+    return React.Children.only(children);
   }
 }
 

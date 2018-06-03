@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { camelize } from './utils';
 import { withMapContext } from './Context';
 
+/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/info-window?hl=de */
 const evtNames = [
   'closeclick',
   'content_changed',
@@ -11,6 +12,8 @@ const evtNames = [
   'position_changed',
   'zindex_changed',
 ];
+
+const updatablePropertyNames = ['content', 'options', 'position', 'zIndex'];
 
 class InfoWindow extends Component {
   constructor(props) {
@@ -25,18 +28,25 @@ class InfoWindow extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { map, position, open, marker } = this.props;
+    if (!this.infoWindow) return this.renderInfoWindow();
 
-    if (map !== prevProps.map) {
-      this.renderInfoWindow();
-    }
+    updatablePropertyNames.forEach(name => {
+      if (this.props[name] !== prevProps[name]) {
+        const func = camelize(`set_${name}`);
 
-    if (position !== prevProps.position) {
-      this.updatePosition();
-    }
+        if (typeof this.infoWindow[func] === 'function') {
+          this.infoWindow[func](this.props[name]);
+        } else {
+          throw Error(`There is no method named ${func}!`);
+        }
+      }
+    });
+
+    const { map, marker, open, position } = this.props;
 
     if (
       open !== prevProps.open ||
+      map !== prevProps.map ||
       marker !== prevProps.marker ||
       position !== prevProps.position
     ) {
@@ -54,21 +64,16 @@ class InfoWindow extends Component {
     });
   }
 
-  updatePosition() {
-    const { position } = this.props;
-    this.infoWindow.setPosition(position);
-  }
-
-  openWindow() {
+  openWindow = () => {
     const { map, marker } = this.props;
     this.infoWindow.open(map, marker);
-  }
+  };
 
-  closeWindow() {
+  closeWindow = () => {
     this.infoWindow.close();
-  }
+  };
 
-  renderInfoWindow() {
+  renderInfoWindow = () => {
     const { api, open, position, ...rest } = this.props;
 
     if (!api) {
@@ -96,7 +101,7 @@ class InfoWindow extends Component {
     });
 
     if (open) this.openWindow();
-  }
+  };
 
   handleEvent = evtName => event => {
     const handlerName = camelize(`on_${evtName}`);
