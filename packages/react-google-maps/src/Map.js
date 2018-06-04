@@ -5,7 +5,7 @@ import { camelize, noop } from './utils';
 import { MapContext, withApiContext } from './Context';
 
 const propTypes = {
-  api: PropTypes.object,
+  api: PropTypes.object.isRequired,
   /** The initial Map center. */
   center: PropTypes.object.isRequired,
   /** The initial Map zoom level. */
@@ -63,12 +63,10 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    if (!this.state.map) this.loadMap();
+    this.createMap();
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.state.map) return this.loadMap();
-
     updatablePropertyNames.forEach(name => {
       if (this.props[name] !== prevProps[name]) {
         const func = camelize(`set_${name}`);
@@ -92,12 +90,8 @@ class Map extends Component {
     });
   }
 
-  loadMap = () => {
+  createMap = () => {
     const { api, entityRef, ...rest } = this.props;
-
-    if (!api) {
-      return;
-    }
 
     const node = this.nodeRef.current;
 
@@ -114,7 +108,7 @@ class Map extends Component {
 
     entityRef(map);
 
-    this.setState({ map }, () => {});
+    this.setState({ map });
   };
 
   handleEvent = evtName => event => {
@@ -126,14 +120,14 @@ class Map extends Component {
 
   render() {
     const { map } = this.state;
-    const { api, children } = this.props;
+    const { children } = this.props;
 
     return (
       <MapContext.Provider value={map}>
         <div style={{ height: '100%' }} ref={this.nodeRef} role="application">
           Loading map...
         </div>
-        {api && children}
+        {map && children}
       </MapContext.Provider>
     );
   }

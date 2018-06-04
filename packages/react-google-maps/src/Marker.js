@@ -63,10 +63,8 @@ class Marker extends Component {
     super(props);
 
     this.listeners = {};
-  }
 
-  componentDidMount() {
-    this.renderMarker();
+    this.createMarker();
   }
 
   componentWillUnmount() {
@@ -80,8 +78,6 @@ class Marker extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.marker) return this.renderMarker();
-
     updatablePropertyNames.forEach(name => {
       if (this.props[name] !== prevProps[name]) {
         const func = camelize(`set_${name}`);
@@ -95,12 +91,8 @@ class Marker extends Component {
     });
   }
 
-  renderMarker = () => {
+  createMarker = () => {
     const { api, animation, position, entityRef, ...rest } = this.props;
-
-    if (!api) {
-      return;
-    }
 
     let pos = position;
     if (!(pos instanceof api.LatLng)) {

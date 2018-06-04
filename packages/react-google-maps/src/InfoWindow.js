@@ -21,15 +21,11 @@ class InfoWindow extends Component {
 
     this.listeners = {};
     this.containerElement = document.createElement('div');
-  }
 
-  componentDidMount() {
-    this.renderInfoWindow();
+    this.createInfoWindow();
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.infoWindow) return this.renderInfoWindow();
-
     updatablePropertyNames.forEach(name => {
       if (this.props[name] !== prevProps[name]) {
         const func = camelize(`set_${name}`);
@@ -73,12 +69,8 @@ class InfoWindow extends Component {
     this.infoWindow.close();
   };
 
-  renderInfoWindow = () => {
+  createInfoWindow = () => {
     const { api, open, position, ...rest } = this.props;
-
-    if (!api) {
-      return;
-    }
 
     let pos = null;
     if (position) {

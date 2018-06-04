@@ -21,10 +21,8 @@ const createEntity = (
       super(props);
 
       this.listeners = {};
-    }
 
-    componentDidMount() {
-      this.renderEntity();
+      this.createEntity();
     }
 
     componentWillUnmount() {
@@ -38,8 +36,6 @@ const createEntity = (
     }
 
     componentDidUpdate(prevProps) {
-      if (!this.entity) return this.renderEntity();
-
       updatablePropertyNames.forEach(name => {
         if (this.props[name] !== prevProps[name]) {
           const func = camelize(`set_${name}`);
@@ -53,12 +49,8 @@ const createEntity = (
       });
     }
 
-    renderEntity = () => {
+    createEntity = () => {
       const { api, map, entityRef, ...rest } = this.props;
-
-      if (!api) {
-        return;
-      }
 
       this.entity = new api[type]({
         ...rest,

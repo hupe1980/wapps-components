@@ -1,11 +1,24 @@
-import { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import { withMapContext } from './Context';
 
+const propTypes = {
+  visible: PropTypes.bool,
+};
+
+const defaultProps = {
+  visible: true,
+};
+
 class OverlayView extends Component {
-  componentDidMount() {
-    this.renderOverlayView();
+  constructor(props) {
+    super(props);
+
+    this.containerElement = document.createElement('div');
+
+    this.createOverlayView();
   }
 
   componentWillUnmount() {
@@ -15,67 +28,67 @@ class OverlayView extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { map, position, children } = this.props;
+    const { position, children, visible } = this.props;
 
     if (
-      map !== prevProps.map ||
       position !== prevProps.position ||
-      children !== prevProps.children
+      children !== prevProps.children ||
+      visible !== prevProps.visible
     ) {
-      if (this.overlayView) {
-        this.overlayView.setMap(null);
-      }
-      this.renderOverlayView();
+      this.draw();
     }
   }
 
-  onAdd() {
-    const { children } = this.props;
-
-    this.div = document.createElement('div');
-
-    this.div.innerHTML = ReactDOMServer.renderToString(children);
-
+  onAdd = () => {
     const panes = this.overlayView.getPanes();
-    panes.markerLayer.appendChild(this.div);
-  }
+    panes.markerLayer.appendChild(this.containerElement);
+  };
 
-  draw() {
-    const { api, position } = this.props;
+  draw = () => {
+    const { api, position, visible } = this.props;
 
-    const latLng = new api.LatLng(position);
     const overlayProjection = this.overlayView.getProjection();
+    const latLng = new api.LatLng(position);
     const pixel = overlayProjection.fromLatLngToDivPixel(latLng);
 
-    this.div.style.position = 'absolute';
-    this.div.style.left = `${pixel.x}px`;
-    this.div.style.top = `${pixel.y}px`;
-  }
+    this.containerElement.style.position = 'absolute';
+    this.containerElement.style.left = `${pixel.x}px`;
+    this.containerElement.style.top = `${pixel.y}px`;
 
-  onRemove() {
-    if (this.div) {
-      this.div.parentNode.removeChild(this.div);
+    if (visible) {
+      this.containerElement.style.visibility = 'visible';
+    } else {
+      this.containerElement.style.visibility = 'hidden';
     }
-  }
+  };
 
-  renderOverlayView() {
+  onRemove = () => {
+    if (this.containerElement) {
+      this.containerElement.remove();
+    }
+  };
+
+  createOverlayView = () => {
     const { api, map } = this.props;
 
-    if (!api) {
-      return;
-    }
-
     this.overlayView = new api.OverlayView();
-    this.overlayView.onAdd = this.onAdd.bind(this);
-    this.overlayView.draw = this.draw.bind(this);
-    this.overlayView.onRemove = this.onRemove.bind(this);
+
+    this.overlayView.onAdd = this.onAdd;
+    this.overlayView.draw = this.draw;
+    this.overlayView.onRemove = this.onRemove;
 
     this.overlayView.setMap(map);
-  }
+  };
 
   render() {
-    return null;
+    return ReactDOM.createPortal(
+      React.Children.only(this.props.children),
+      this.containerElement,
+    );
   }
 }
+
+OverlayView.propTypes = propTypes;
+OverlayView.defaultProps = defaultProps;
 
 export default withMapContext(OverlayView);

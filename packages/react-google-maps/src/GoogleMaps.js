@@ -32,6 +32,8 @@ class GoogleMaps extends Component {
     const { api } = this.state;
     const { children } = this.props;
 
+    if (!api) return null;
+
     return (
       <ApiContext.Provider value={api}>
         <Fragment>{children}</Fragment>
