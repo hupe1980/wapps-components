@@ -7,7 +7,7 @@ import React from 'react';
 import GoogleMaps, { Map } from '@wapps/react-google-maps';
 
 const App = () => (
-  <GoogleMaps googleMaps={{ key: YOUR_googleMaps_KEY }}>
+  <GoogleMaps api={{ key: YOUR_googleMaps_KEY }}>
     <div style={{ height: '100vh', width: '100wh'}}>
       <Map
         center={{
@@ -37,7 +37,7 @@ import React from 'react';
 import GoogleMaps, { Map, Marker } from '@wapps/react-google-maps';
 
 const App = () => (
-  <GoogleMaps googleMaps={{ key: YOUR_googleMaps_KEY }}>
+  <GoogleMaps api={{ key: YOUR_googleMaps_KEY }}>
     <div style={{ height: '100vh', width: '100wh'}}>
       <Map
         center={{
@@ -68,7 +68,7 @@ import React from 'react';
 import GoogleMaps, { Map, OverlayView } from '@wapps/react-google-maps';
 
 const App = () => (
-  <GoogleMaps googleMaps={{ key: YOUR_googleMaps_KEY }}>
+  <GoogleMaps api={{ key: YOUR_googleMaps_KEY }}>
     <div style={{ height: '100vh', width: '100wh'}}>
       <Map
         center={{
