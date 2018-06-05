@@ -13,8 +13,8 @@ const withDirectionsService = WrappedComponent => {
     constructor(props) {
       super(props);
 
-      const { api } = this.props;
-      this.directionsService = new api.DirectionsService();
+      const { googleMaps } = this.props;
+      this.directionsService = new googleMaps.DirectionsService();
 
       this.state = {
         directions: null,
@@ -34,10 +34,15 @@ const withDirectionsService = WrappedComponent => {
     }
 
     fetchDirections = () => {
-      const { api, request } = this.props;
+      const { googleMaps, request } = this.props;
 
-      this.directionsService.route(request, (result, status) => {
-        if (status === api.DirectionsStatus.OK) {
+      const req = {
+        ...request,
+        travelMode: request.travelMode.toUpperCase(),
+      };
+
+      this.directionsService.route(req, (result, status) => {
+        if (status === googleMaps.DirectionsStatus.OK) {
           this.setState({
             directions: result,
           });

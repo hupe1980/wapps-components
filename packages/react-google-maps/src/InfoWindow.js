@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-import { camelize } from './utils';
+import { camelize, noop } from './utils';
 import { withMapContext } from './Context';
+
+const propTypes = {
+  entityRef: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
+
+const defaultProps = {
+  entityRef: noop,
+};
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/info-window?hl=de */
 const evtNames = [
@@ -38,14 +48,9 @@ class InfoWindow extends Component {
       }
     });
 
-    const { map, marker, open, position } = this.props;
+    const { open } = this.props;
 
-    if (
-      open !== prevProps.open ||
-      map !== prevProps.map ||
-      marker !== prevProps.marker ||
-      position !== prevProps.position
-    ) {
+    if (open !== prevProps.open) {
       open ? this.openWindow() : this.closeWindow();
     }
   }
@@ -61,8 +66,8 @@ class InfoWindow extends Component {
   }
 
   openWindow = () => {
-    const { map, marker } = this.props;
-    this.infoWindow.open(map, marker);
+    const { map, anchor } = this.props;
+    this.infoWindow.open(map, anchor);
   };
 
   closeWindow = () => {
@@ -70,18 +75,11 @@ class InfoWindow extends Component {
   };
 
   createInfoWindow = () => {
-    const { api, open, position, ...rest } = this.props;
+    const { googleMaps, open, options, entityRef, ...rest } = this.props;
 
-    let pos = null;
-    if (position) {
-      if (!(pos instanceof api.LatLng)) {
-        pos = new api.LatLng(position.lat, position.lng);
-      }
-    }
-
-    this.infoWindow = new api.InfoWindow({
+    this.infoWindow = new googleMaps.InfoWindow({
       content: this.containerElement,
-      position: pos,
+      ...options,
       ...rest,
     });
 
@@ -93,6 +91,8 @@ class InfoWindow extends Component {
     });
 
     if (open) this.openWindow();
+
+    entityRef(this.infoWindow);
   };
 
   handleEvent = evtName => event => {
@@ -109,5 +109,8 @@ class InfoWindow extends Component {
     );
   }
 }
+
+InfoWindow.propTypes = propTypes;
+InfoWindow.defaultProps = defaultProps;
 
 export default withMapContext(InfoWindow);

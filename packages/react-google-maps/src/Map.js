@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { camelize, noop } from './utils';
-import { MapContext, withApiContext } from './Context';
+import { MapContext, withGoogleMapsContext } from './Context';
 
 const propTypes = {
-  api: PropTypes.object.isRequired,
+  googleMaps: PropTypes.object.isRequired,
   /** The initial Map center. */
   center: PropTypes.object.isRequired,
   /** The initial Map zoom level. */
@@ -14,7 +14,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  panTo: null,
   entityRef: noop,
 };
 
@@ -91,11 +90,12 @@ class Map extends Component {
   }
 
   createMap = () => {
-    const { api, entityRef, ...rest } = this.props;
+    const { googleMaps, entityRef, options, ...rest } = this.props;
 
     const node = this.nodeRef.current;
 
-    const map = new api.Map(node, {
+    const map = new googleMaps.Map(node, {
+      ...options,
       ...rest,
     });
 
@@ -136,4 +136,4 @@ class Map extends Component {
 Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
-export default withApiContext(Map);
+export default withGoogleMapsContext(Map);

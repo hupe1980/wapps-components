@@ -1,4 +1,4 @@
-import { camelize, noop } from '../utils';
+import { camelize, compose, noop } from '../utils';
 
 describe('utils', () => {
   describe('camelize', () => {
@@ -19,8 +19,23 @@ describe('utils', () => {
   });
 
   describe('noop', () => {
-    it('noop returns undefined ', () => {
+    it('noop returns undefined', () => {
       expect(noop()).toEqual(undefined);
+    });
+  });
+
+  describe('compose', () => {
+    it('returns the first function if given only one ', () => {
+      expect(compose(noop)).toBe(noop);
+    });
+
+    it('composes from right to left', () => {
+      const add10 = x => x + 10;
+      const square = x => x * x;
+
+      expect(compose(square)(5)).toBe(25);
+      expect(compose(square, add10)(5)).toBe(225);
+      expect(compose(add10, square, add10)(5)).toBe(235);
     });
   });
 });

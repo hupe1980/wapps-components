@@ -7,7 +7,7 @@ import React from 'react';
 import GoogleMaps, { Map } from '@wapps/react-google-maps';
 
 const App = () => (
-  <GoogleMaps api={{ key: YOUR_API_KEY }}>
+  <GoogleMaps googleMaps={{ key: YOUR_googleMaps_KEY }}>
     <div style={{ height: '100vh', width: '100wh'}}>
       <Map
         center={{
@@ -37,7 +37,7 @@ import React from 'react';
 import GoogleMaps, { Map, Marker } from '@wapps/react-google-maps';
 
 const App = () => (
-  <GoogleMaps api={{ key: YOUR_API_KEY }}>
+  <GoogleMaps googleMaps={{ key: YOUR_googleMaps_KEY }}>
     <div style={{ height: '100vh', width: '100wh'}}>
       <Map
         center={{
@@ -65,10 +65,10 @@ To place a overlay on the Map, include it as a child of the <Map /> component.
 
 ```js
 import React from 'react';
-import GoogleMaps, { Map, OverLayView } from '@wapps/react-google-maps';
+import GoogleMaps, { Map, OverlayView } from '@wapps/react-google-maps';
 
 const App = () => (
-  <GoogleMaps api={{ key: YOUR_API_KEY }}>
+  <GoogleMaps googleMaps={{ key: YOUR_googleMaps_KEY }}>
     <div style={{ height: '100vh', width: '100wh'}}>
       <Map
         center={{

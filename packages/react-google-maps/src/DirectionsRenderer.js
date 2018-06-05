@@ -1,3 +1,4 @@
+import { compose } from './utils';
 import createEntity from './createEntity';
 import withDirectionsService from './withDirectionsService';
 import { withMapContext } from './Context';
@@ -19,4 +20,6 @@ const DirectionsRenderer = createEntity(
   updatablePropertyNames,
 );
 
-export default withMapContext(withDirectionsService(DirectionsRenderer));
+export default compose(withMapContext, withDirectionsService)(
+  DirectionsRenderer,
+);

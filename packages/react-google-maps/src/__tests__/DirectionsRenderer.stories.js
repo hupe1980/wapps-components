@@ -13,7 +13,7 @@ storiesOf('react-google-maps|DirectionsRenderer', module).add('default', () => (
           request={{
             origin: 'penn station, new york, ny',
             destination: '260 Broadway New York NY 10007',
-            travelMode: 'WALKING',
+            travelMode: 'walking',
           }}
         />
       </Map>

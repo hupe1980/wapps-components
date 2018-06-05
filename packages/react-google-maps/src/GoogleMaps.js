@@ -1,18 +1,18 @@
 import React, { Component, Fragment } from 'react';
 
-import { ApiContext } from './Context';
+import { GoogleMapsContext } from './Context';
 import withGoogleMapsApi from './withGoogleMapsApi';
 
 class GoogleMaps extends Component {
   state = {
-    api: null,
+    googleMaps: null,
   };
 
   componentDidMount() {
     const { hasScriptsLoaded, hasScriptsLoadedSuccessfully } = this.props;
     if (hasScriptsLoaded && hasScriptsLoadedSuccessfully) {
       this.setState({
-        api: window.google.maps,
+        googleMaps: window.google.maps,
       });
     }
   }
@@ -22,22 +22,22 @@ class GoogleMaps extends Component {
     if (hasScriptsLoaded && !prevProps.hasScriptsLoaded) {
       if (hasScriptsLoadedSuccessfully) {
         this.setState({
-          api: window.google.maps,
+          googleMaps: window.google.maps,
         });
       }
     }
   }
 
   render() {
-    const { api } = this.state;
+    const { googleMaps } = this.state;
     const { children } = this.props;
 
-    if (!api) return null;
+    if (!googleMaps) return null;
 
     return (
-      <ApiContext.Provider value={api}>
+      <GoogleMapsContext.Provider value={googleMaps}>
         <Fragment>{children}</Fragment>
-      </ApiContext.Provider>
+      </GoogleMapsContext.Provider>
     );
   }
 }

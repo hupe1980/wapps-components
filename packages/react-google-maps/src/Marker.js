@@ -92,27 +92,22 @@ class Marker extends Component {
   }
 
   createMarker = () => {
-    const { api, animation, position, entityRef, ...rest } = this.props;
-
-    let pos = position;
-    if (!(pos instanceof api.LatLng)) {
-      pos = new api.LatLng(position.lat, position.lng);
-    }
+    const { googleMaps, animation, entityRef, options, ...rest } = this.props;
 
     let ani = animation;
     if (ani) {
       ani = ani.toLowerCase();
 
       if (ani === 'bounce') {
-        ani = api.Animation.BOUNCE;
+        ani = googleMaps.Animation.BOUNCE;
       } else if (ani === 'drop') {
-        ani = api.Animation.DROP;
+        ani = googleMaps.Animation.DROP;
       }
     }
 
-    this.marker = new api.Marker({
-      position: pos,
+    this.marker = new googleMaps.Marker({
       animation: ani,
+      ...options,
       ...rest,
     });
 
@@ -137,7 +132,7 @@ class Marker extends Component {
     if (!this.props.children) return null;
 
     const children = React.cloneElement(this.props.children, {
-      marker: this.marker,
+      anchor: this.marker,
     });
     return React.Children.only(children);
   }

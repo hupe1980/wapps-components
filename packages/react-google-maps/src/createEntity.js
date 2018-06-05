@@ -50,9 +50,10 @@ const createEntity = (
     }
 
     createEntity = () => {
-      const { api, map, entityRef, ...rest } = this.props;
+      const { googleMaps, map, entityRef, options, ...rest } = this.props;
 
-      this.entity = new api[type]({
+      this.entity = new googleMaps[type]({
+        ...options,
         ...rest,
       });
 

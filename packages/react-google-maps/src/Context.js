@@ -1,23 +1,23 @@
 import React from 'react';
 
-const ApiContext = React.createContext(null);
+const GoogleMapsContext = React.createContext(null);
 
 const MapContext = React.createContext(null);
 
-const withApiContext = Component => props => (
-  <ApiContext.Consumer>
-    {api => <Component {...props} api={api} />}
-  </ApiContext.Consumer>
+const withGoogleMapsContext = Component => props => (
+  <GoogleMapsContext.Consumer>
+    {googleMaps => <Component {...props} googleMaps={googleMaps} />}
+  </GoogleMapsContext.Consumer>
 );
 
 const withMapContext = Component => props => (
-  <ApiContext.Consumer>
-    {api => (
+  <GoogleMapsContext.Consumer>
+    {googleMaps => (
       <MapContext.Consumer>
-        {map => <Component {...props} api={api} map={map} />}
+        {map => <Component {...props} googleMaps={googleMaps} map={map} />}
       </MapContext.Consumer>
     )}
-  </ApiContext.Consumer>
+  </GoogleMapsContext.Consumer>
 );
 
-export { ApiContext, withApiContext, MapContext, withMapContext };
+export { GoogleMapsContext, withGoogleMapsContext, MapContext, withMapContext };

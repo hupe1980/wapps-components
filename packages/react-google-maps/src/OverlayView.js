@@ -6,10 +6,12 @@ import { withMapContext } from './Context';
 
 const propTypes = {
   visible: PropTypes.bool,
+  mapPane: PropTypes.string,
 };
 
 const defaultProps = {
   visible: true,
+  mapPane: 'markerLayer',
 };
 
 class OverlayView extends Component {
@@ -40,15 +42,17 @@ class OverlayView extends Component {
   }
 
   onAdd = () => {
+    const { mapPane } = this.props;
+
     const panes = this.overlayView.getPanes();
-    panes.markerLayer.appendChild(this.containerElement);
+    panes[mapPane].appendChild(this.containerElement);
   };
 
   draw = () => {
-    const { api, position, visible } = this.props;
+    const { googleMaps, position, visible } = this.props;
 
     const overlayProjection = this.overlayView.getProjection();
-    const latLng = new api.LatLng(position);
+    const latLng = new googleMaps.LatLng(position);
     const pixel = overlayProjection.fromLatLngToDivPixel(latLng);
 
     this.containerElement.style.position = 'absolute';
@@ -69,9 +73,9 @@ class OverlayView extends Component {
   };
 
   createOverlayView = () => {
-    const { api, map } = this.props;
+    const { googleMaps, map } = this.props;
 
-    this.overlayView = new api.OverlayView();
+    this.overlayView = new googleMaps.OverlayView();
 
     this.overlayView.onAdd = this.onAdd;
     this.overlayView.draw = this.draw;
