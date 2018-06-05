@@ -28,6 +28,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
+    "places.js",
     "lib/**"
   ],
   "dependencies": {
