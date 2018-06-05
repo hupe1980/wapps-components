@@ -24,7 +24,7 @@
     "TransitLayer"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
