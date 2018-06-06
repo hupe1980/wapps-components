@@ -8,6 +8,7 @@
     "react-google-maps",
     "google-maps",
     "places",
+    "drawing",
     "BicyclingLayer",
     "Circle",
     "DirectionsRenderer",

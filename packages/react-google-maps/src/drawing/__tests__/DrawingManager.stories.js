@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import { Api, Container } from './helper';
 import Map from '../../Map';
-import Automcomplete from '../Autocomplete';
+import DrawingManager from '../DrawingManager';
 
 const styles = {
   width: '50%',
@@ -17,7 +17,7 @@ const styles = {
   boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
 };
 
-storiesOf('react-google-maps.places|Automcomplete', module)
+storiesOf('react-google-maps.drawing|DrawingManager', module)
   .add('default', () => (
     <Api>
       <Container>
@@ -28,14 +28,12 @@ storiesOf('react-google-maps.places|Automcomplete', module)
           }}
           zoom={10}
         >
-          <Automcomplete>
-            <input type="text" style={styles} />
-          </Automcomplete>
+          <DrawingManager />
         </Map>
       </Container>
     </Api>
   ))
-  .add('with controlPosition', () => (
+  .add('with Options', () => (
     <Api>
       <Container>
         <Map
@@ -45,24 +43,13 @@ storiesOf('react-google-maps.places|Automcomplete', module)
           }}
           zoom={10}
         >
-          <Automcomplete controlPosition="TOP_LEFT">
-            <input type="text" style={styles} />
-          </Automcomplete>
+          <DrawingManager
+            drawingControlOptions={{
+              position: 2,
+              drawingModes: ['circle', 'rectangle'],
+            }}
+          />
         </Map>
       </Container>
-    </Api>
-  ))
-  .add('without Map', () => (
-    <Api>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Automcomplete
-          onPlaceChanged={autocomplete => {
-            const place = autocomplete.getPlace();
-            alert(JSON.stringify(place));
-          }}
-        >
-          <input type="text" style={styles} />
-        </Automcomplete>
-      </div>
     </Api>
   ));
