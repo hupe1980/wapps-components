@@ -1,6 +1,6 @@
 import { camelize, compose, noop } from '../utils';
 
-describe('utils', () => {
+describe('internal/utils', () => {
   describe('camelize', () => {
     it('camelize strings with underscore', () => {
       const str = 'foo_bar';

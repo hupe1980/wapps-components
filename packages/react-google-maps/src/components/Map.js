@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from './utils';
+import { camelize, noop } from '../internal/utils';
+import EventHandler from '../internal/EventHandler';
 import { MapContext, withGoogleMapsContext } from './Context';
 
 const propTypes = {
@@ -57,7 +58,7 @@ class Map extends Component {
       map: null,
     };
 
-    this.listeners = {};
+    this.eventHandler = null;
     this.nodeRef = React.createRef();
   }
 
@@ -84,9 +85,7 @@ class Map extends Component {
       this.setState({ map: null });
     }
 
-    Object.keys(this.listeners).forEach(evtName => {
-      this.listeners[evtName].remove();
-    });
+    this.eventHandler.clearInstanceListeners();
   }
 
   createMap = () => {
@@ -99,23 +98,11 @@ class Map extends Component {
       ...rest,
     });
 
-    evtNames.forEach(evtName => {
-      this.listeners[evtName] = map.addListener(
-        evtName,
-        this.handleEvent(evtName),
-      );
-    });
+    this.eventHandler = new EventHandler(map, this.props, evtNames);
 
     entityRef(map);
 
     this.setState({ map });
-  };
-
-  handleEvent = evtName => event => {
-    const handlerName = camelize(`on_${evtName}`);
-    if (this.props[handlerName]) {
-      this.props[handlerName](this.state.map, event);
-    }
   };
 
   render() {

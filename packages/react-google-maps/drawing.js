@@ -1,1 +1,1 @@
-module.exports = require('./lib/drawing');
+module.exports = require('./lib/components/drawing');

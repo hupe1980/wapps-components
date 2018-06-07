@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from './utils';
+import { camelize, noop } from '../internal/utils';
+import EventHandler from '../internal/EventHandler';
 import { withMapContext } from './Context';
 
 const propTypes = {
@@ -29,9 +30,8 @@ class InfoWindow extends Component {
   constructor(props) {
     super(props);
 
-    this.listeners = {};
+    this.eventHandler = null;
     this.containerElement = document.createElement('div');
-
     this.createInfoWindow();
   }
 
@@ -60,14 +60,21 @@ class InfoWindow extends Component {
       this.infoWindow.setMap(null);
     }
 
-    Object.keys(this.listeners).forEach(evtName => {
-      this.listeners[evtName].remove();
-    });
+    this.eventHandler.clearInstanceListeners();
   }
 
   openWindow = () => {
-    const { map, anchor } = this.props;
-    this.infoWindow.open(map, anchor);
+    const { map, anchor, googleMaps } = this.props;
+
+    if (!anchor) return this.infoWindow.open(map);
+
+    if (anchor instanceof googleMaps.Marker) {
+      return this.infoWindow.open(map, anchor);
+    }
+
+    const position = anchor.getBounds().getCenter();
+    this.infoWindow.setPosition(position);
+    this.infoWindow.open(map);
   };
 
   closeWindow = () => {
@@ -83,23 +90,11 @@ class InfoWindow extends Component {
       ...rest,
     });
 
-    evtNames.forEach(evtName => {
-      this.listeners[evtName] = this.infoWindow.addListener(
-        evtName,
-        this.handleEvent(evtName),
-      );
-    });
+    this.eventHandler = new EventHandler(this.infoWindow, this.props, evtNames);
 
     if (open) this.openWindow();
 
     entityRef(this.infoWindow);
-  };
-
-  handleEvent = evtName => event => {
-    const handlerName = camelize(`on_${evtName}`);
-    if (this.props[handlerName]) {
-      this.props[handlerName](this.infoWindow, event);
-    }
   };
 
   render() {

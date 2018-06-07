@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from './utils';
+import { camelize, noop } from '../internal/utils';
+import EventHandler from '../internal/EventHandler';
 import { withMapContext } from './Context';
 
 const propTypes = {
@@ -62,8 +63,7 @@ class Marker extends Component {
   constructor(props) {
     super(props);
 
-    this.listeners = {};
-
+    this.eventHandler = null;
     this.createMarker();
   }
 
@@ -72,9 +72,7 @@ class Marker extends Component {
       this.marker.setMap(null);
     }
 
-    Object.keys(this.listeners).forEach(evtName => {
-      this.listeners[evtName].remove();
-    });
+    this.eventHandler.clearInstanceListeners();
   }
 
   componentDidUpdate(prevProps) {
@@ -111,21 +109,9 @@ class Marker extends Component {
       ...rest,
     });
 
-    evtNames.forEach(evtName => {
-      this.listeners[evtName] = this.marker.addListener(
-        evtName,
-        this.handleEvent(evtName),
-      );
-    });
+    this.eventHandler = new EventHandler(this.marker, this.props, evtNames);
 
     entityRef(this.marker);
-  };
-
-  handleEvent = evtName => event => {
-    const handlerName = camelize(`on_${evtName}`);
-    if (this.props[handlerName]) {
-      this.props[handlerName](this.marker, this.props.map, event);
-    }
   };
 
   render() {

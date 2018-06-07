@@ -1,4 +1,4 @@
-import createEntity from './createEntity';
+import createShape from './createShape';
 import { withMapContext } from './Context';
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Rectangle */
@@ -26,6 +26,6 @@ const updatablePropertyNames = [
   'visible',
 ];
 
-const Rectangle = createEntity('Rectangle', evtNames, updatablePropertyNames);
+const Rectangle = createShape('Rectangle', evtNames, updatablePropertyNames);
 
 export default withMapContext(Rectangle);

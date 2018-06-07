@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from '../utils';
+import { camelize, noop } from '../../internal/utils';
+import EventHandler from '../../internal/EventHandler';
 
 const createPlacesWidget = (type, evtNames = []) => props => {
   const propTypes = {
@@ -18,7 +19,7 @@ const createPlacesWidget = (type, evtNames = []) => props => {
     constructor(props) {
       super(props);
 
-      this.listeners = {};
+      this.eventHandler = null;
       this.containerElement = document.createElement('div');
       this.nodeRef = React.createRef();
     }
@@ -28,12 +29,8 @@ const createPlacesWidget = (type, evtNames = []) => props => {
     }
 
     componentWillUnmount() {
-      Object.keys(this.listeners).forEach(evtName => {
-        this.listeners[evtName].remove();
-      });
+      this.eventHandler.clearInstanceListeners();
     }
-
-    componentDidUpdate(prevProps) {}
 
     createWidget = () => {
       const {
@@ -47,31 +44,19 @@ const createPlacesWidget = (type, evtNames = []) => props => {
 
       const node = this.nodeRef.current;
 
-      this.autocomplete = new googleMaps.places[type](node, {
+      this.widget = new googleMaps.places[type](node, {
         ...options,
         ...rest,
       });
 
-      evtNames.forEach(evtName => {
-        this.listeners[evtName] = this.autocomplete.addListener(
-          evtName,
-          this.handleEvent(evtName),
-        );
-      });
+      this.eventHandler = new EventHandler(this.widget, this.props, evtNames);
 
       if (map) {
         map.controls[googleMaps.ControlPosition[controlPosition]].push(node);
-        this.autocomplete.bindTo('bounds', map);
+        this.widget.bindTo('bounds', map);
       }
 
-      entityRef(this.autocomplete);
-    };
-
-    handleEvent = evtName => event => {
-      const handlerName = camelize(`on_${evtName}`);
-      if (this.props[handlerName]) {
-        this.props[handlerName](this.autocomplete, this.props.map, event);
-      }
+      entityRef(this.widget);
     };
 
     render() {

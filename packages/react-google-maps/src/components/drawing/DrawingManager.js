@@ -2,7 +2,8 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withMapContext } from '../Context';
-import { camelize, noop } from '../utils';
+import { camelize, noop } from '../../internal/utils';
+import EventHandler from '../../internal/EventHandler';
 
 const propTypes = {
   entityRef: PropTypes.func,
@@ -28,19 +29,16 @@ class DrawingManager extends Component {
   constructor(props) {
     super(props);
 
-    this.listeners = {};
-
-    this.createEntity();
+    this.eventHandler = null;
+    this.createDrawingManager();
   }
 
   componentWillUnmount() {
-    if (this.entity) {
-      this.entity.setMap(null);
+    if (this.drawingManager) {
+      this.drawingManager.setMap(null);
     }
 
-    Object.keys(this.listeners).forEach(evtName => {
-      this.listeners[evtName].remove();
-    });
+    this.eventHandler.clearInstanceListeners();
   }
 
   componentDidUpdate(prevProps) {
@@ -48,8 +46,8 @@ class DrawingManager extends Component {
       if (this.props[name] !== prevProps[name]) {
         const func = camelize(`set_${name}`);
 
-        if (typeof this.entity[func] === 'function') {
-          this.entity[func](this.props[name]);
+        if (typeof this.drawingManager[func] === 'function') {
+          this.drawingManager[func](this.props[name]);
         } else {
           throw Error(`There is no method named ${func}!`);
         }
@@ -57,31 +55,23 @@ class DrawingManager extends Component {
     });
   }
 
-  createEntity = () => {
+  createDrawingManager = () => {
     const { googleMaps, map, entityRef, options, ...rest } = this.props;
 
-    this.entity = new googleMaps.drawing.DrawingManager({
+    this.drawingManager = new googleMaps.drawing.DrawingManager({
       ...options,
       ...rest,
     });
 
-    evtNames.forEach(evtName => {
-      this.listeners[evtName] = this.entity.addListener(
-        evtName,
-        this.handleEvent(evtName),
-      );
-    });
+    this.eventHandler = new EventHandler(
+      this.drawingManager,
+      this.props,
+      evtNames,
+    );
 
-    this.entity.setMap(map);
+    this.drawingManager.setMap(map);
 
-    entityRef(this.entity);
-  };
-
-  handleEvent = evtName => event => {
-    const handlerName = camelize(`on_${evtName}`);
-    if (this.props[handlerName]) {
-      this.props[handlerName](this.entity, this.props.map, event);
-    }
+    entityRef(this.drawingManager);
   };
 
   render() {

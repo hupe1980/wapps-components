@@ -1,4 +1,4 @@
-import createEntity from './createEntity';
+import createShape from './createShape';
 import { withMapContext } from './Context';
 
 /** https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Circle */
@@ -28,6 +28,6 @@ const updatablePropertyNames = [
   'visible',
 ];
 
-const Circle = createEntity('Circle', evtNames, updatablePropertyNames);
+const Circle = createShape('Circle', evtNames, updatablePropertyNames);
 
 export default withMapContext(Circle);

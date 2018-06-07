@@ -1,1 +1,1 @@
-module.exports = require('./lib/places');
+module.exports = require('./lib/components/places');

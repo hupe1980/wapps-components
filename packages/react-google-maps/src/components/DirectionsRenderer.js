@@ -1,4 +1,4 @@
-import { compose } from './utils';
+import { compose } from '../internal/utils';
 import createEntity from './createEntity';
 import withDirectionsService from './withDirectionsService';
 import { withMapContext } from './Context';

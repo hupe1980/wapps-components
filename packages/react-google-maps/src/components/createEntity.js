@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from './utils';
+import EventHandler from '../internal/EventHandler';
+import { camelize, noop } from '../internal/utils';
 
 const createEntity = (
   type,
@@ -20,8 +21,7 @@ const createEntity = (
     constructor(props) {
       super(props);
 
-      this.listeners = {};
-
+      this.eventHandler = null;
       this.createEntity();
     }
 
@@ -30,9 +30,7 @@ const createEntity = (
         this.entity.setMap(null);
       }
 
-      Object.keys(this.listeners).forEach(evtName => {
-        this.listeners[evtName].remove();
-      });
+      this.eventHandler.clearInstanceListeners();
     }
 
     componentDidUpdate(prevProps) {
@@ -57,23 +55,11 @@ const createEntity = (
         ...rest,
       });
 
-      evtNames.forEach(evtName => {
-        this.listeners[evtName] = this.entity.addListener(
-          evtName,
-          this.handleEvent(evtName),
-        );
-      });
+      this.eventHandler = new EventHandler(this.entity, this.props, evtNames);
 
       this.entity.setMap(map);
 
       entityRef(this.entity);
-    };
-
-    handleEvent = evtName => event => {
-      const handlerName = camelize(`on_${evtName}`);
-      if (this.props[handlerName]) {
-        this.props[handlerName](this.entity, this.props.map, event);
-      }
     };
 
     render() {
