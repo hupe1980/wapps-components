@@ -90,7 +90,8 @@ class InfoWindow extends Component {
       ...rest,
     });
 
-    this.eventHandler = new EventHandler(this.infoWindow, this.props, evtNames);
+    this.eventHandler = new EventHandler(googleMaps, this.infoWindow);
+    this.eventHandler.addListenersFromProps(this.props, evtNames);
 
     if (open) this.openWindow();
 

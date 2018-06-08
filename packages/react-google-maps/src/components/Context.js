@@ -6,7 +6,7 @@ const MapContext = React.createContext(null);
 
 const withGoogleMapsContext = Component => props => (
   <GoogleMapsContext.Consumer>
-    {googleMaps => <Component {...props} googleMaps={googleMaps} />}
+    {googleMaps => <Component googleMaps={googleMaps} {...props} />}
   </GoogleMapsContext.Consumer>
 );
 
@@ -14,7 +14,7 @@ const withMapContext = Component => props => (
   <GoogleMapsContext.Consumer>
     {googleMaps => (
       <MapContext.Consumer>
-        {map => <Component {...props} googleMaps={googleMaps} map={map} />}
+        {map => <Component googleMaps={googleMaps} map={map} {...props} />}
       </MapContext.Consumer>
     )}
   </GoogleMapsContext.Consumer>

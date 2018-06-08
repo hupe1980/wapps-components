@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from '../../internal/utils';
+import { noop } from '../../internal/utils';
 import EventHandler from '../../internal/EventHandler';
 
 const createPlacesWidget = (type, evtNames = []) => props => {
@@ -49,7 +49,8 @@ const createPlacesWidget = (type, evtNames = []) => props => {
         ...rest,
       });
 
-      this.eventHandler = new EventHandler(this.widget, this.props, evtNames);
+      this.eventHandler = new EventHandler(googleMaps, this.widget);
+      this.eventHandler.addListenersFromProps(this.props, evtNames);
 
       if (map) {
         map.controls[googleMaps.ControlPosition[controlPosition]].push(node);

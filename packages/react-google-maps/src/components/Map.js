@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from '../internal/utils';
+import { noop } from '../internal/utils';
+import { updateProperties } from '../internal/properties';
 import EventHandler from '../internal/EventHandler';
 import { MapContext, withGoogleMapsContext } from './Context';
+
+/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
 
 const propTypes = {
   googleMaps: PropTypes.object.isRequired,
@@ -18,7 +21,6 @@ const defaultProps = {
   entityRef: noop,
 };
 
-/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
 const evtNames = [
   'bounds_changed',
   'center_changed',
@@ -67,24 +69,15 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    updatablePropertyNames.forEach(name => {
-      if (this.props[name] !== prevProps[name]) {
-        const func = camelize(`set_${name}`);
-
-        if (typeof this.state.map[func] === 'function') {
-          this.state.map[func](this.props[name]);
-        } else {
-          throw Error(`There is no method named ${func}!`);
-        }
-      }
-    });
+    updateProperties(
+      this.state.map,
+      this.props,
+      prevProps,
+      updatablePropertyNames,
+    );
   }
 
   componentWillUnmount() {
-    if (this.state.map) {
-      this.setState({ map: null });
-    }
-
     this.eventHandler.clearInstanceListeners();
   }
 
@@ -98,7 +91,8 @@ class Map extends Component {
       ...rest,
     });
 
-    this.eventHandler = new EventHandler(map, this.props, evtNames);
+    this.eventHandler = new EventHandler(googleMaps, map);
+    this.eventHandler.addListenersFromProps(this.props, evtNames);
 
     entityRef(map);
 

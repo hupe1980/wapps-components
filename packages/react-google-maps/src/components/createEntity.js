@@ -55,7 +55,8 @@ const createEntity = (
         ...rest,
       });
 
-      this.eventHandler = new EventHandler(this.entity, this.props, evtNames);
+      this.eventHandler = new EventHandler(googleMaps, this.entity);
+      this.eventHandler.addListenersFromProps(this.props, evtNames);
 
       this.entity.setMap(map);
 

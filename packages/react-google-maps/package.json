@@ -30,6 +30,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
+    "drawing.js",
     "places.js",
     "lib/**"
   ],
@@ -37,6 +38,9 @@
     "@wapps/react-script-loader": "^0.0.4",
     "hoist-non-react-statics": "^2.5.0",
     "prop-types": "^15.6.1"
+  },
+  "devDependencies": {
+    "@wapps/jest-google-maps-mock": "^0.0.1"
   },
   "peerDependencies": {
     "react": "^16.4.0",

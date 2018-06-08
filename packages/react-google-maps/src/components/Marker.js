@@ -109,7 +109,8 @@ class Marker extends Component {
       ...rest,
     });
 
-    this.eventHandler = new EventHandler(this.marker, this.props, evtNames);
+    this.eventHandler = new EventHandler(googleMaps, this.marker);
+    this.eventHandler.addListenersFromProps(this.props, evtNames);
 
     entityRef(this.marker);
   };

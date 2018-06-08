@@ -63,11 +63,8 @@ class DrawingManager extends Component {
       ...rest,
     });
 
-    this.eventHandler = new EventHandler(
-      this.drawingManager,
-      this.props,
-      evtNames,
-    );
+    this.eventHandler = new EventHandler(googleMaps, this.drawingManager);
+    this.eventHandler.addListenersFromProps(this.props, evtNames);
 
     this.drawingManager.setMap(map);
 

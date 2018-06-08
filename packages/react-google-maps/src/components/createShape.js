@@ -55,7 +55,8 @@ const createShape = (
         ...rest,
       });
 
-      this.eventHandler = new EventHandler(this.shape, this.props, evtNames);
+      this.eventHandler = new EventHandler(googleMaps, this.shape);
+      this.eventHandler.addListenersFromProps(this.props, evtNames);
 
       this.shape.setMap(map);
 

@@ -1,0 +1,15 @@
+{
+  "name": "@wapps/jest-google-maps-mock",
+  "description": "Google Maps Jest Mock",
+  "repository": "hupe1980/wapps-components",
+  "author": "hello@webappsolutions.de",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "files": [
+    "lib/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
