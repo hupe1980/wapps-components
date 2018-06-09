@@ -17,12 +17,18 @@ const evtNames = [
 ];
 
 const propertyNames = [
+  'clickable',
   'draggable',
   'editable',
+  'geodesic',
+  'icons',
   'map',
-  'options',
   'path',
+  'strokeColor',
+  'strokeOpacity',
+  'strokeWeight',
   'visible',
+  'zIndex',
 ];
 
 const Polyline = createEntity('Polyline', evtNames, propertyNames);

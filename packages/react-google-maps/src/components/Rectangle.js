@@ -19,11 +19,17 @@ const evtNames = [
 
 const propertyNames = [
   'bounds',
+  'clickable',
   'draggable',
   'editable',
+  'fillColor',
+  'fillOpacity',
   'map',
-  'options',
+  'strokeColor',
+  'strokePosition',
+  'strokeWeight',
   'visible',
+  'zIndex',
 ];
 
 const Rectangle = createShape('Rectangle', evtNames, propertyNames);

@@ -7,16 +7,29 @@ export default class OptionsHandler {
     this.propertyNames = propertyNames;
   }
 
-  updateOptionsFormProps = (props, prevProps) => {
-    this.propertyNames.forEach(name => {
-      const options = {};
-
-      if (!isEqual(props[name], prevProps[name])) {
+  getOptionsFromProps = props =>
+    Object.keys(props)
+      .filter(name => this.propertyNames.includes(name))
+      .reduce((options, name) => {
         options[name] = props[name];
+        return options;
+      }, {});
+
+  updateOptionsFormProps = (props, prevProps) => {
+    const options = this.getOptionsFromProps(props);
+
+    Object.keys(options).forEach(name => {
+      if (isEqual(options[name], prevProps[name])) {
+        delete options[name];
       }
-      if (!isEmpty(options)) this.setOptions(options);
     });
+
+    if (!isEmpty(options)) this.setOptions(options);
   };
 
-  setOptions = options => this.instance.setValues(options);
+  setOptions = props =>
+    this.instance.setValues(this.getOptionsFromProps(props));
+
+  setOptionsFromProps = props =>
+    this.instance.setValues(this.getOptionsFromProps(props));
 }

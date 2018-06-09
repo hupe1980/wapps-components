@@ -20,12 +20,19 @@ const evtNames = [
 
 const propertyNames = [
   'center',
+  'clickable',
   'draggable',
   'editable',
+  'fillColor',
+  'fillOpacity',
   'map',
-  'options',
   'radius',
+  'strokeColor',
+  'strokeOpacity',
+  'strokePosition',
+  'strokeWeight',
   'visible',
+  'zIndex',
 ];
 
 const Circle = createShape('Circle', evtNames, propertyNames);

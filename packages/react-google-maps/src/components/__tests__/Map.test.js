@@ -24,9 +24,9 @@ describe('Map', () => {
     expect(mapDiv.length).toBe(1);
     expect(googleMaps.Map).toHaveBeenLastCalledWith(mapDiv.getDOMNode());
 
-    const setValuesMock = googleMaps.Map.mock.instances[0].setValues;
-    expect(setValuesMock).toHaveBeenCalledTimes(1);
-    expect(setValuesMock).toHaveBeenLastCalledWith(opts);
+    const map = googleMaps.Map.mock.instances[0];
+    expect(map.setValues).toHaveBeenCalledTimes(1);
+    expect(map.setValues).toHaveBeenLastCalledWith(opts);
   });
 
   it('should remove all listeners on unmount', () => {
@@ -61,17 +61,36 @@ describe('Map', () => {
     expect(googleMaps.Map).toHaveBeenCalledTimes(1);
     expect(googleMaps.Map.mock.instances.length).toBe(1);
 
-    const setValuesMock = googleMaps.Map.mock.instances[0].setValues;
-    expect(setValuesMock).toHaveBeenCalledTimes(1);
+    const map = googleMaps.Map.mock.instances[0];
+    expect(map.setValues).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({ zoom: 5 });
-    expect(setValuesMock).toHaveBeenCalledTimes(2);
-    expect(setValuesMock).toHaveBeenLastCalledWith({
+    expect(map.setValues).toHaveBeenCalledTimes(2);
+    expect(map.setValues).toHaveBeenLastCalledWith({
       zoom: 5,
     });
 
     // no change
     wrapper.setProps({ zoom: 5 });
-    expect(setValuesMock).toHaveBeenCalledTimes(2);
+    expect(map.setValues).toHaveBeenCalledTimes(2);
+  });
+
+  it('should ignore unknown options', () => {
+    mount(
+      <Map
+        googleMaps={googleMaps}
+        zoom={opts.zoom}
+        center={opts.center}
+        foo="bar" // unknown option
+      />,
+    );
+
+    expect(googleMaps.Map).toHaveBeenCalledTimes(1);
+    expect(googleMaps.Map.mock.instances.length).toBe(1);
+
+    const map = googleMaps.Map.mock.instances[0];
+
+    expect(map.setValues).toHaveBeenCalledTimes(1);
+    expect(map.setValues).toHaveBeenLastCalledWith(opts);
   });
 });

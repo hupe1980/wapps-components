@@ -36,7 +36,7 @@ const createEntity = (type, evtNames, propertyNames) => props => {
     }
 
     createEntity = () => {
-      const { googleMaps, map, entityRef, options, ...rest } = this.props;
+      const { googleMaps, entityRef, options, ...rest } = this.props;
 
       this.entity = new googleMaps[type]();
 
@@ -52,8 +52,6 @@ const createEntity = (type, evtNames, propertyNames) => props => {
 
       this.eventHandler = new EventHandler(googleMaps, this.entity);
       this.eventHandler.addListenersFromProps(this.props, evtNames);
-
-      this.entity.setMap(map);
 
       entityRef(this.entity);
     };

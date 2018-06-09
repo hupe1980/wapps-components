@@ -12,6 +12,8 @@ export const isFunction = value => typeof value === 'function';
 
 export const isString = value => typeof value === 'string';
 
+export const isObject = value => typeof value === 'object';
+
 export const isEmpty = value => {
   if (value == null) return true;
 
@@ -33,9 +35,17 @@ export const isEqual = (a, b) => {
     return a === b;
   }
 
-  if (a && b && isFunction(a.equals)) {
-    return a.equals(b);
+  if (a && b && isFunction(a.equals)) return a.equals(b);
+
+  if (isObject(a) && isObject(b)) {
+    if (Object.keys(a).length !== Object.keys(b).length) return false;
+
+    Object.keys(a).forEach(key => {
+      if (!isEqual(a[key], b[key])) {
+        return false;
+      }
+    });
   }
 
-  return a === b; //TODO;
+  return a === b;
 };

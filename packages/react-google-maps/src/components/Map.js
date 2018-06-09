@@ -2,25 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { noop } from '../internal/utils';
-import EventHandler from '../internal/EventHandler';
+import EventHandler, { getHandlerName } from '../internal/EventHandler';
 import OptionsHandler from '../internal/OptionsHandler';
 import { MapContext, withGoogleMapsContext } from './Context';
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
-
-const propTypes = {
-  googleMaps: PropTypes.object.isRequired,
-  /** The initial Map center. */
-  center: PropTypes.object.isRequired,
-  /** The initial Map zoom level. */
-  zoom: PropTypes.number.isRequired,
-  entityRef: PropTypes.func,
-};
-
-const defaultProps = {
-  entityRef: noop,
-};
-
 const evtNames = [
   'bounds_changed',
   'center_changed',
@@ -42,15 +28,59 @@ const evtNames = [
 ];
 
 const propertyNames = [
+  'backgroundColor',
   'center',
   'clickableIcons',
+  'disableDefaultUI',
+  'disableDoubleClickZoom',
+  'draggable',
+  'draggingCursor',
+  'fullscreenControl',
+  'fullscreenControlOption',
+  'gestureHandling',
   'heading',
+  'keyboardShortcuts',
+  'mapTypeControl',
+  'mapTypeControlOptions',
   'mapTypeId',
-  'options',
+  'maxZoom',
+  'minZoom',
+  'noClear',
+  'panControl',
+  'panControlOptions',
+  'rotateControl',
+  'rotateControlOptions',
+  'scaleControl',
+  'scaleControlOptions',
+  'scrollwheel',
   'streetView',
+  'streetViewControl',
+  'streetViewControlOption',
+  'styles',
   'tilt',
   'zoom',
+  'zoomControl',
+  'zoomControlOptions',
 ];
+
+const propTypes = {
+  googleMaps: PropTypes.object.isRequired,
+  /** The initial Map center. */
+  center: PropTypes.object.isRequired,
+  /** The initial Map zoom level. */
+  zoom: PropTypes.number.isRequired,
+  entityRef: PropTypes.func,
+};
+
+const defaultProps = {
+  entityRef: noop,
+};
+
+evtNames.forEach(name => {
+  const handlerName = getHandlerName(name);
+  propTypes[handlerName] = PropTypes.func;
+  defaultProps[handlerName] = noop;
+});
 
 class Map extends Component {
   constructor(props) {
@@ -85,7 +115,7 @@ class Map extends Component {
     const map = new googleMaps.Map(node);
 
     this.optionsHandler = new OptionsHandler(googleMaps, map, propertyNames);
-    this.optionsHandler.setOptions({
+    this.optionsHandler.setOptionsFromProps({
       ...options,
       ...rest,
     });

@@ -36,7 +36,7 @@ const createShape = (type, evtNames, propertyNames) => props => {
     }
 
     createShape = () => {
-      const { googleMaps, map, entityRef, options, ...rest } = this.props;
+      const { googleMaps, entityRef, options, ...rest } = this.props;
 
       this.shape = new googleMaps[type]();
 
@@ -52,8 +52,6 @@ const createShape = (type, evtNames, propertyNames) => props => {
 
       this.eventHandler = new EventHandler(googleMaps, this.shape);
       this.eventHandler.addListenersFromProps(this.props, evtNames);
-
-      this.shape.setMap(map);
 
       entityRef(this.shape);
     };

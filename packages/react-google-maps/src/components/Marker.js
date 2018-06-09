@@ -8,7 +8,7 @@ import { withMapContext } from './Context';
 
 const propTypes = {
   /** Which animation to play when marker is added to a map. */
-  animation: PropTypes.oneOf(['bounce', 'drop']),
+  animation: PropTypes.oneOf(['bounce', 'drop', 'lo', 'go']),
   /** Marker position. */
   position: PropTypes.object.isRequired,
   entityRef: PropTypes.func,

@@ -1,9 +1,4 @@
-# jest-google-maps-mock
-Jest google maps mock
-
-## Example
-```js
-import createGoogleMapsMock from '@wapps/jest-google-maps-mock';
+import createGoogleMapsMock from '../createGoogleMapsMock';
 
 describe('createGoogleMapsMock', () => {
   let googleMaps;
@@ -21,7 +16,3 @@ describe('createGoogleMapsMock', () => {
     expect(googleMaps.Map).toHaveBeenLastCalledWith(mapDiv);
   });
 });
-```
-
-## Installation
-- `npm install --save @wapps/jest-google-maps-mock`

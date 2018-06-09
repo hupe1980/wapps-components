@@ -1,5 +1,7 @@
 import { camelize, isEmpty } from './utils';
 
+export const getHandlerName = evtName => camelize(`on_${evtName}`);
+
 export default class EventHandler {
   constructor(googleMaps, instance) {
     this.event = googleMaps.event;
@@ -9,7 +11,7 @@ export default class EventHandler {
 
   addListenersFromProps = (props, evtNames = []) => {
     evtNames.forEach(evtName => {
-      const handlerName = camelize(`on_${evtName}`);
+      const handlerName = getHandlerName(evtName);
 
       if (props[handlerName]) {
         this.listeners[evtName] = this.instance.addListener(evtName, event =>

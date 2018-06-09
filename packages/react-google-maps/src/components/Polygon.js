@@ -17,13 +17,20 @@ const evtNames = [
 ];
 
 const propertyNames = [
+  'clickable',
   'draggable',
   'editable',
+  'fillColor',
+  'fillOpacity',
+  'geodesic',
   'map',
-  'options',
-  'path',
   'paths',
+  'strokeColor',
+  'strokeOpacity',
+  'strokePosition',
+  'strokeWeight',
   'visible',
+  'zIndex',
 ];
 
 const Polygon = createEntity('Polygon', evtNames, propertyNames);
