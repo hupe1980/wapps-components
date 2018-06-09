@@ -1,4 +1,4 @@
-import createShape from './createShape';
+import createComponent from './createComponent';
 import { withMapContext } from './Context';
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Rectangle */
@@ -32,6 +32,6 @@ const propertyNames = [
   'zIndex',
 ];
 
-const Rectangle = createShape('Rectangle', evtNames, propertyNames);
+const Rectangle = createComponent('Rectangle', evtNames, propertyNames);
 
 export default withMapContext(Rectangle);

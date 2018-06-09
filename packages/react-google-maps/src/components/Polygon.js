@@ -1,4 +1,4 @@
-import createEntity from './createEntity';
+import createComponent from './createComponent';
 import { withMapContext } from './Context';
 
 /** https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Polygon */
@@ -33,6 +33,6 @@ const propertyNames = [
   'zIndex',
 ];
 
-const Polygon = createEntity('Polygon', evtNames, propertyNames);
+const Polygon = createComponent('Polygon', evtNames, propertyNames);
 
 export default withMapContext(Polygon);

@@ -22,8 +22,8 @@ describe('Marker', () => {
     mount(
       <Marker
         googleMaps={googleMaps}
-        map={map}
-        position={{ lat: 52.520008, lng: 13.404954 }}
+        map={options.map}
+        position={options.position}
       />,
     );
 
@@ -34,5 +34,39 @@ describe('Marker', () => {
     const marker = googleMaps.Marker.mock.instances[0];
     expect(marker.setValues).toHaveBeenCalledTimes(1);
     expect(marker.setValues).toHaveBeenLastCalledWith(options);
+  });
+
+  it('should remove from map on unmount', () => {
+    const options = {
+      map,
+      position: { lat: 52.520008, lng: 13.404954 },
+    };
+
+    const wrapper = mount(
+      <Marker
+        googleMaps={googleMaps}
+        map={options.map}
+        position={options.position}
+        onClick={() => {}}
+      />,
+    );
+
+    expect(googleMaps.Marker).toHaveBeenCalledTimes(1);
+
+    const marker = googleMaps.Marker.mock.instances[0];
+
+    expect(marker.setMap).toHaveBeenCalledTimes(0);
+    expect(marker.setValues).toHaveBeenCalledTimes(1);
+    expect(marker.setValues).toHaveBeenLastCalledWith(options);
+
+    wrapper.unmount();
+
+    expect(marker.setMap).toHaveBeenCalledTimes(1);
+    expect(marker.setMap).toHaveBeenLastCalledWith(null);
+
+    expect(googleMaps.event.clearInstanceListeners).toHaveBeenCalledTimes(1);
+    expect(googleMaps.event.clearInstanceListeners).toHaveBeenLastCalledWith(
+      marker,
+    );
   });
 });

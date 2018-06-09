@@ -8,7 +8,7 @@ import { withMapContext } from './Context';
 
 const propTypes = {
   /** Which animation to play when marker is added to a map. */
-  animation: PropTypes.oneOf(['bounce', 'drop', 'lo', 'go']),
+  animation: PropTypes.oneOf(['bounce', 'drop']),
   /** Marker position. */
   position: PropTypes.object.isRequired,
   entityRef: PropTypes.func,
@@ -44,15 +44,17 @@ const evtNames = [
 ];
 
 const propertyNames = [
+  'anchorPoint',
   'animation',
   'clickable',
+  'crossOnDrag',
   'cursor',
   'draggable',
   'icon',
   'label',
   'map',
   'opacity',
-  'options',
+  'optimized',
   'position',
   'shape',
   'title',
@@ -82,16 +84,21 @@ class Marker extends Component {
   }
 
   createMarker = () => {
-    const { googleMaps, animation, entityRef, options, ...rest } = this.props;
+    const { googleMaps, animation, entityRef, ...rest } = this.props;
 
     let ani = animation;
     if (ani) {
       ani = ani.toLowerCase();
 
-      if (ani === 'bounce') {
-        ani = googleMaps.Animation.BOUNCE;
-      } else if (ani === 'drop') {
-        ani = googleMaps.Animation.DROP;
+      switch (ani) {
+        case 'bounce':
+          ani = googleMaps.Animation.BOUNCE;
+          break;
+        case 'drop':
+          ani = googleMaps.Animation.DROP;
+          break;
+        default:
+          ani = null;
       }
     }
 
@@ -104,7 +111,6 @@ class Marker extends Component {
     );
     this.optionsHandler.setOptions({
       animation: ani,
-      ...options,
       ...rest,
     });
 

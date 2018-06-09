@@ -22,7 +22,6 @@ const createPlacesWidget = (type, evtNames, propertyNames) => props => {
 
       this.optionsHandler = null;
       this.eventHandler = null;
-      this.containerElement = document.createElement('div');
       this.nodeRef = React.createRef();
     }
 
@@ -40,7 +39,6 @@ const createPlacesWidget = (type, evtNames, propertyNames) => props => {
         googleMaps,
         map,
         entityRef,
-        options,
         ...rest
       } = this.props;
 
@@ -54,7 +52,6 @@ const createPlacesWidget = (type, evtNames, propertyNames) => props => {
         propertyNames,
       );
       this.optionsHandler.setOptions({
-        ...options,
         ...rest,
       });
 

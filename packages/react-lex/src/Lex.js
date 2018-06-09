@@ -46,7 +46,6 @@ class Lex extends Component {
 
     postText(inputText)
       .then(data => {
-        console.log(data);
         const { dialogState, message, messageFormat } = data;
 
         messages.push({

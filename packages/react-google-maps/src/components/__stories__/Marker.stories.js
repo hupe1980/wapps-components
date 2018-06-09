@@ -22,6 +22,7 @@ storiesOf('react-google-maps|Marker', module)
               lat: 52.520008,
               lng: 13.404954,
             }}
+            icon={<div>Test</div>}
           />
         </Map>
       </Container>

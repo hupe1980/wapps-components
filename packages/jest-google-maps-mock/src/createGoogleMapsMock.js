@@ -40,8 +40,8 @@ const createGoogleMapsMock = (libraries = []) => {
     Animation: {
       BOUNCE: 1,
       DROP: 2,
-      LO: 3,
-      GO: 4,
+      Lo: 3,
+      Go: 4,
     },
     BicyclingLayer: jest.fn().mockImplementation(function() {
       createMVCObject(this);

@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 
-const styles = {
-  bar: {
-    backgroundColor: 'blue',
-    color: 'white',
-    width: '0%',
-  },
-};
-
 class Loop extends Component {
   constructor(props) {
     super(props);
+
+    this.nodeRef = React.createRef();
     this.startTime = performance.now();
   }
 
@@ -20,16 +14,21 @@ class Loop extends Component {
 
     if (progress >= 100) {
       this.startTime = performance.now();
+      return;
     }
 
-    this.refs.bar.style.width = `${progress}%`;
+    const node = this.nodeRef.current;
+    node.style.width = `${progress}%`;
   }
 
   render() {
     const { text } = this.props;
 
     return (
-      <div style={styles.bar} ref="bar">
+      <div
+        style={{ backgroundColor: 'blue', color: 'white' }}
+        ref={this.nodeRef}
+      >
         {text}
       </div>
     );

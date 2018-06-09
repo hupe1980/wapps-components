@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf lib",
-    "build": "lerna exec --parallel -- babel src -d lib --ignore __tests__",
-    "build:watch": "lerna exec --parallel -- babel src -d lib --ignore __tests__ --watch",
+    "build": "lerna exec --parallel -- babel src -d lib --ignore __tests__,__stories__",
+    "build:watch": "lerna exec --parallel -- babel src -d lib --ignore __tests__,__stories__ --watch",
     "clean": "lerna clean",
     "format": "prettier-eslint --write \"packages/*/src/**/*.js\"",
     "storybook": "start-storybook -p 9001 -c .storybook",

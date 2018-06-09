@@ -1,4 +1,4 @@
-import createEntity from './createEntity';
+import createComponent from './createComponent';
 import { withMapContext } from './Context';
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Polyline */
@@ -31,6 +31,6 @@ const propertyNames = [
   'zIndex',
 ];
 
-const Polyline = createEntity('Polyline', evtNames, propertyNames);
+const Polyline = createComponent('Polyline', evtNames, propertyNames);
 
 export default withMapContext(Polyline);

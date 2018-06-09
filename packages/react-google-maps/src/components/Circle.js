@@ -1,4 +1,5 @@
-import createShape from './createShape';
+import React from 'react';
+import createComponent from './createComponent';
 import { withMapContext } from './Context';
 
 /** https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Circle */
@@ -35,6 +36,6 @@ const propertyNames = [
   'zIndex',
 ];
 
-const Circle = createShape('Circle', evtNames, propertyNames);
+const Circle = createComponent('Circle', evtNames, propertyNames);
 
 export default withMapContext(Circle);
