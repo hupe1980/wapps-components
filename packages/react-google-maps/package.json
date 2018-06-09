@@ -26,7 +26,7 @@
     "TransitLayer"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
@@ -40,7 +40,7 @@
     "prop-types": "^15.6.1"
   },
   "devDependencies": {
-    "@wapps/jest-google-maps-mock": "^0.0.4"
+    "@wapps/jest-google-maps-mock": "^0.0.5"
   },
   "peerDependencies": {
     "react": "^16.4.0",
