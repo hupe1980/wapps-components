@@ -10,7 +10,7 @@
     "react"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
