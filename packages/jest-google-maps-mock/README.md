@@ -24,4 +24,4 @@ describe('createGoogleMapsMock', () => {
 ```
 
 ## Installation
-- `npm install --save @wapps/jest-google-maps-mock`
+- `npm install --save-dev @wapps/jest-google-maps-mock`
