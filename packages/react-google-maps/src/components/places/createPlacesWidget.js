@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import { noop } from '../../internal/utils';
 import EventHandler from '../../internal/EventHandler';
+import OptionsHandler from '../../internal/OptionsHandler';
 
-const createPlacesWidget = (type, evtNames = []) => props => {
+const createPlacesWidget = (type, evtNames, propertyNames) => props => {
   const propTypes = {
     entityRef: PropTypes.func,
     controlPosition: PropTypes.string,
@@ -19,6 +20,7 @@ const createPlacesWidget = (type, evtNames = []) => props => {
     constructor(props) {
       super(props);
 
+      this.optionsHandler = null;
       this.eventHandler = null;
       this.containerElement = document.createElement('div');
       this.nodeRef = React.createRef();
@@ -44,7 +46,14 @@ const createPlacesWidget = (type, evtNames = []) => props => {
 
       const node = this.nodeRef.current;
 
-      this.widget = new googleMaps.places[type](node, {
+      this.widget = new googleMaps.places[type](node);
+
+      this.optionsHandler = new OptionsHandler(
+        googleMaps,
+        this.widget,
+        propertyNames,
+      );
+      this.optionsHandler.setOptions({
         ...options,
         ...rest,
       });

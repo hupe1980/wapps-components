@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { noop } from '../internal/utils';
-import { updateProperties } from '../internal/properties';
 import EventHandler from '../internal/EventHandler';
+import OptionsHandler from '../internal/OptionsHandler';
 import { MapContext, withGoogleMapsContext } from './Context';
 
 /** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
@@ -41,7 +41,7 @@ const evtNames = [
   'zoom_changed',
 ];
 
-const updatablePropertyNames = [
+const propertyNames = [
   'center',
   'clickableIcons',
   'heading',
@@ -60,6 +60,7 @@ class Map extends Component {
       map: null,
     };
 
+    this.optionsHandler = null;
     this.eventHandler = null;
     this.nodeRef = React.createRef();
   }
@@ -69,12 +70,7 @@ class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    updateProperties(
-      this.state.map,
-      this.props,
-      prevProps,
-      updatablePropertyNames,
-    );
+    this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
   }
 
   componentWillUnmount() {
@@ -86,7 +82,10 @@ class Map extends Component {
 
     const node = this.nodeRef.current;
 
-    const map = new googleMaps.Map(node, {
+    const map = new googleMaps.Map(node);
+
+    this.optionsHandler = new OptionsHandler(googleMaps, map, propertyNames);
+    this.optionsHandler.setOptions({
       ...options,
       ...rest,
     });

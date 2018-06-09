@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import EventHandler from '../internal/EventHandler';
-import { camelize, noop } from '../internal/utils';
+import OptionsHandler from '../internal/OptionsHandler';
+import { noop } from '../internal/utils';
 
-const createEntity = (
-  type,
-  evtNames = [],
-  updatablePropertyNames = [],
-) => props => {
+const createEntity = (type, evtNames, propertyNames) => props => {
   const propTypes = {
     entityRef: PropTypes.func,
   };
@@ -21,6 +18,7 @@ const createEntity = (
     constructor(props) {
       super(props);
 
+      this.optionsHandler = null;
       this.eventHandler = null;
       this.createEntity();
     }
@@ -34,23 +32,20 @@ const createEntity = (
     }
 
     componentDidUpdate(prevProps) {
-      updatablePropertyNames.forEach(name => {
-        if (this.props[name] !== prevProps[name]) {
-          const func = camelize(`set_${name}`);
-
-          if (typeof this.entity[func] === 'function') {
-            this.entity[func](this.props[name]);
-          } else {
-            throw Error(`There is no method named ${func}!`);
-          }
-        }
-      });
+      this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
     }
 
     createEntity = () => {
       const { googleMaps, map, entityRef, options, ...rest } = this.props;
 
-      this.entity = new googleMaps[type]({
+      this.entity = new googleMaps[type]();
+
+      this.optionsHandler = new OptionsHandler(
+        googleMaps,
+        this.entity,
+        propertyNames,
+      );
+      this.optionsHandler.setOptions({
         ...options,
         ...rest,
       });

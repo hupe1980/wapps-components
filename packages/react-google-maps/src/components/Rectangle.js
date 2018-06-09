@@ -17,7 +17,7 @@ const evtNames = [
   'rightclick',
 ];
 
-const updatablePropertyNames = [
+const propertyNames = [
   'bounds',
   'draggable',
   'editable',
@@ -26,6 +26,6 @@ const updatablePropertyNames = [
   'visible',
 ];
 
-const Rectangle = createShape('Rectangle', evtNames, updatablePropertyNames);
+const Rectangle = createShape('Rectangle', evtNames, propertyNames);
 
 export default withMapContext(Rectangle);

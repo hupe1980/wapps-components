@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from '../internal/utils';
+import { noop } from '../internal/utils';
 import EventHandler from '../internal/EventHandler';
+import OptionsHandler from '../internal/OptionsHandler';
 import { withMapContext } from './Context';
 
 const propTypes = {
@@ -42,7 +43,7 @@ const evtNames = [
   'zindex_changed',
 ];
 
-const updatablePropertyNames = [
+const propertyNames = [
   'animation',
   'clickable',
   'cursor',
@@ -63,6 +64,7 @@ class Marker extends Component {
   constructor(props) {
     super(props);
 
+    this.optionsHandler = null;
     this.eventHandler = null;
     this.createMarker();
   }
@@ -76,17 +78,7 @@ class Marker extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    updatablePropertyNames.forEach(name => {
-      if (this.props[name] !== prevProps[name]) {
-        const func = camelize(`set_${name}`);
-
-        if (typeof this.marker[func] === 'function') {
-          this.marker[func](this.props[name]);
-        } else {
-          throw Error(`There is no method named ${func}!`);
-        }
-      }
-    });
+    this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
   }
 
   createMarker = () => {
@@ -103,7 +95,14 @@ class Marker extends Component {
       }
     }
 
-    this.marker = new googleMaps.Marker({
+    this.marker = new googleMaps.Marker();
+
+    this.optionsHandler = new OptionsHandler(
+      googleMaps,
+      this.marker,
+      propertyNames,
+    );
+    this.optionsHandler.setOptions({
       animation: ani,
       ...options,
       ...rest,

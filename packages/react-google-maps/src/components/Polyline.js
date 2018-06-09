@@ -16,7 +16,7 @@ const evtNames = [
   'rightclick',
 ];
 
-const updatablePropertyNames = [
+const propertyNames = [
   'draggable',
   'editable',
   'map',
@@ -25,6 +25,6 @@ const updatablePropertyNames = [
   'visible',
 ];
 
-const Polyline = createEntity('Polyline', evtNames, updatablePropertyNames);
+const Polyline = createEntity('Polyline', evtNames, propertyNames);
 
 export default withMapContext(Polyline);

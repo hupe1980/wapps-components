@@ -16,7 +16,7 @@ const evtNames = [
   'rightclick',
 ];
 
-const updatablePropertyNames = [
+const propertyNames = [
   'draggable',
   'editable',
   'map',
@@ -26,6 +26,6 @@ const updatablePropertyNames = [
   'visible',
 ];
 
-const Polygon = createEntity('Polygon', evtNames, updatablePropertyNames);
+const Polygon = createEntity('Polygon', evtNames, propertyNames);
 
 export default withMapContext(Polygon);

@@ -1,4 +1,4 @@
-import { camelize, compose, noop } from '../utils';
+import { camelize, compose, noop, isEmpty } from '../utils';
 
 describe('internal/utils', () => {
   describe('camelize', () => {
@@ -36,6 +36,25 @@ describe('internal/utils', () => {
       expect(compose(square)(5)).toBe(25);
       expect(compose(square, add10)(5)).toBe(225);
       expect(compose(add10, square, add10)(5)).toBe(235);
+    });
+  });
+
+  describe('isEmpty', () => {
+    it('return true if the object is empty', () => {
+      expect(isEmpty({})).toEqual(true);
+      expect(isEmpty({ test: 'test ' })).toEqual(false);
+    });
+
+    it('return true if the value is null', () => {
+      expect(isEmpty(null)).toEqual(true);
+      expect(isEmpty(1)).toEqual(false);
+      expect(isEmpty(true)).toEqual(false);
+      expect(isEmpty('test')).toEqual(false);
+    });
+
+    it('return true if the length of the string is 0', () => {
+      expect(isEmpty('')).toEqual(true);
+      expect(isEmpty('test')).toEqual(false);
     });
   });
 });

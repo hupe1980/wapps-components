@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import { camelize, noop } from '../internal/utils';
+import { noop } from '../internal/utils';
 import EventHandler from '../internal/EventHandler';
+import OptionsHandler from '../internal/OptionsHandler';
 import { withMapContext } from './Context';
 
+/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/info-window?hl=de */
 const propTypes = {
   entityRef: PropTypes.func,
   children: PropTypes.node.isRequired,
@@ -15,7 +17,6 @@ const defaultProps = {
   entityRef: noop,
 };
 
-/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/info-window?hl=de */
 const evtNames = [
   'closeclick',
   'content_changed',
@@ -24,31 +25,22 @@ const evtNames = [
   'zindex_changed',
 ];
 
-const updatablePropertyNames = ['content', 'options', 'position', 'zIndex'];
+const propertyNames = ['content', 'options', 'position', 'zIndex'];
 
 class InfoWindow extends Component {
   constructor(props) {
     super(props);
 
+    this.optionsHandler = null;
     this.eventHandler = null;
     this.containerElement = document.createElement('div');
     this.createInfoWindow();
   }
 
   componentDidUpdate(prevProps) {
-    updatablePropertyNames.forEach(name => {
-      if (this.props[name] !== prevProps[name]) {
-        const func = camelize(`set_${name}`);
+    const { open, ...rest } = this.props;
 
-        if (typeof this.infoWindow[func] === 'function') {
-          this.infoWindow[func](this.props[name]);
-        } else {
-          throw Error(`There is no method named ${func}!`);
-        }
-      }
-    });
-
-    const { open } = this.props;
+    this.optionsHandler.updateOptionsFormProps(rest, prevProps);
 
     if (open !== prevProps.open) {
       open ? this.openWindow() : this.closeWindow();
@@ -84,7 +76,14 @@ class InfoWindow extends Component {
   createInfoWindow = () => {
     const { googleMaps, open, options, entityRef, ...rest } = this.props;
 
-    this.infoWindow = new googleMaps.InfoWindow({
+    this.infoWindow = new googleMaps.InfoWindow();
+
+    this.optionsHandler = new OptionsHandler(
+      googleMaps,
+      this.infoWindow,
+      propertyNames,
+    );
+    this.optionsHandler.setOptions({
       content: this.containerElement,
       ...options,
       ...rest,

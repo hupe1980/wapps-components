@@ -1,45 +1,49 @@
 const createGoogleMapsMock = (libraries = []) => {
-  const listeners = {};
+  const createMVCObject = instance => {
+    const listeners = {};
+    instance.listeners = listeners;
 
-  const MVCObject = jest.fn(() => ({
-    listeners: {},
-    addListener: jest.fn((event, fn) => {
-      listeners[event] = listeners[event] || [];
-      listeners[event].push(fn);
-      return {
-        remove: () => {
-          const index = listeners[event].indexOf(fn);
+    const funcs = {
+      addListener: jest.fn((event, fn) => {
+        listeners[event] = listeners[event] || [];
+        listeners[event].push(fn);
+        return {
+          remove: () => {
+            const index = listeners[event].indexOf(fn);
 
-          if (index !== -1) {
-            listeners[event].splice(index, 1);
-          }
-        },
-      };
-    }),
-    bindTo: jest.fn(),
-    get: jest.fn(),
-    notify: jest.fn(),
-    set: jest.fn(),
-    setValues: jest.fn(),
-    unbind: jest.fn(),
-    unbindAll: jest.fn(),
-  }));
+            if (index !== -1) {
+              listeners[event].splice(index, 1);
+            }
+          },
+        };
+      }),
+      bindTo: jest.fn(),
+      get: jest.fn(),
+      notify: jest.fn(),
+      set: jest.fn(),
+      setValues: jest.fn(),
+      unbind: jest.fn(),
+      unbindAll: jest.fn(),
+    };
+
+    Object.keys(funcs).forEach(key => {
+      instance[key] = funcs[key];
+    });
+  };
 
   const maps = {
     Animation: {
       BOUNCE: '',
       DROP: '',
     },
-    BicyclingLayer: jest.fn(() => ({
-      ...MVCObject(),
-    })),
-    Circle: jest.fn(opts => ({
-      ...MVCObject(),
-    })),
-    MVCObject: MVCObject,
-    Map: jest.fn((mapDiv, opts) => ({
-      ...MVCObject(),
-    })),
+    BicyclingLayer: jest.fn(() => ({})),
+    Circle: jest.fn(opts => ({})),
+    //MVCObject: MVCObject,
+    Map: jest.fn().mockImplementation(function(mapDiv, options) {
+      this.mapDiv = mapDiv;
+      this.options = options;
+      createMVCObject(this);
+    }),
     event: {
       clearInstanceListeners: jest.fn(),
     },

@@ -18,7 +18,7 @@ const evtNames = [
   'rightclick',
 ];
 
-const updatablePropertyNames = [
+const propertyNames = [
   'center',
   'draggable',
   'editable',
@@ -28,6 +28,6 @@ const updatablePropertyNames = [
   'visible',
 ];
 
-const Circle = createShape('Circle', evtNames, updatablePropertyNames);
+const Circle = createShape('Circle', evtNames, propertyNames);
 
 export default withMapContext(Circle);

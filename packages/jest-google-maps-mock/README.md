@@ -1,5 +1,5 @@
 # jest-google-maps-mock
-Google Maps Jest Mock
+Jest google maps mock
 
 ## Installation
 - `npm install --save @wapps/jest-google-maps-mock`

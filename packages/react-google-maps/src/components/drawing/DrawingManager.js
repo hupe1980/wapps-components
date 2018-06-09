@@ -2,9 +2,11 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { withMapContext } from '../Context';
-import { camelize, noop } from '../../internal/utils';
+import { noop } from '../../internal/utils';
 import EventHandler from '../../internal/EventHandler';
+import OptionsHandler from '../../internal/OptionsHandler';
 
+/** https://developers.google.com/maps/documentation/javascript/reference/3.exp/drawing?hl=de#DrawingManager */
 const propTypes = {
   entityRef: PropTypes.func,
 };
@@ -13,7 +15,6 @@ const defaultProps = {
   entityRef: noop,
 };
 
-/** https://developers.google.com/maps/documentation/javascript/reference/3.exp/drawing?hl=de#DrawingManager */
 const evtNames = [
   'circlecomplete',
   'markercomplete',
@@ -23,12 +24,13 @@ const evtNames = [
   'rectanglecomplete',
 ];
 
-const updatablePropertyNames = ['drawingMode', 'map', 'options'];
+const propertyNames = ['drawingMode', 'map', 'options'];
 
 class DrawingManager extends Component {
   constructor(props) {
     super(props);
 
+    this.optionsHandler = null;
     this.eventHandler = null;
     this.createDrawingManager();
   }
@@ -42,23 +44,20 @@ class DrawingManager extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    updatablePropertyNames.forEach(name => {
-      if (this.props[name] !== prevProps[name]) {
-        const func = camelize(`set_${name}`);
-
-        if (typeof this.drawingManager[func] === 'function') {
-          this.drawingManager[func](this.props[name]);
-        } else {
-          throw Error(`There is no method named ${func}!`);
-        }
-      }
-    });
+    this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
   }
 
   createDrawingManager = () => {
     const { googleMaps, map, entityRef, options, ...rest } = this.props;
 
-    this.drawingManager = new googleMaps.drawing.DrawingManager({
+    this.drawingManager = new googleMaps.drawing.DrawingManager();
+
+    this.optionsHandler = new OptionsHandler(
+      googleMaps,
+      this.drawingManager,
+      propertyNames,
+    );
+    this.optionsHandler.setOptions({
       ...options,
       ...rest,
     });

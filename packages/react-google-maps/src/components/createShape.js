@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import EventHandler from '../internal/EventHandler';
-import { camelize, noop } from '../internal/utils';
+import OptionsHandler from '../internal/OptionsHandler';
+import { noop } from '../internal/utils';
 
-const createShape = (
-  type,
-  evtNames = [],
-  updatablePropertyNames = [],
-) => props => {
+const createShape = (type, evtNames, propertyNames) => props => {
   const propTypes = {
     entityRef: PropTypes.func,
   };
@@ -21,6 +18,7 @@ const createShape = (
     constructor(props) {
       super(props);
 
+      this.optionsHandler = null;
       this.eventHandler = null;
       this.createShape();
     }
@@ -34,23 +32,20 @@ const createShape = (
     }
 
     componentDidUpdate(prevProps) {
-      updatablePropertyNames.forEach(name => {
-        if (this.props[name] !== prevProps[name]) {
-          const func = camelize(`set_${name}`);
-
-          if (typeof this.shape[func] === 'function') {
-            this.shape[func](this.props[name]);
-          } else {
-            throw Error(`There is no method named ${func}!`);
-          }
-        }
-      });
+      this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
     }
 
     createShape = () => {
       const { googleMaps, map, entityRef, options, ...rest } = this.props;
 
-      this.shape = new googleMaps[type]({
+      this.shape = new googleMaps[type]();
+
+      this.optionsHandler = new OptionsHandler(
+        googleMaps,
+        this.shape,
+        propertyNames,
+      );
+      this.optionsHandler.setOptions({
         ...options,
         ...rest,
       });
