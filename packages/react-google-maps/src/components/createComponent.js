@@ -5,7 +5,7 @@ import EventHandler, { getHandlerName } from '../internal/EventHandler';
 import OptionsHandler from '../internal/OptionsHandler';
 import { noop } from '../internal/utils';
 
-const createComponent = (type, evtNames, propertyNames) => props => {
+const createComponent = (type, evtNames, propertyNames) => {
   const propTypes = {
     entityRef: PropTypes.func,
     visible: PropTypes.bool,
@@ -41,8 +41,6 @@ const createComponent = (type, evtNames, propertyNames) => props => {
       const { map, visible } = this.props;
 
       this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
-
-      console.log(visible, prevProps.visible, 'TTTT');
 
       if (visible !== prevProps.visible) {
         visible ? this.comp.setMap(map) : this.comp.setMap(null);
@@ -87,7 +85,7 @@ const createComponent = (type, evtNames, propertyNames) => props => {
   Comp.propTypes = propTypes;
   Comp.defaultProps = defaultProps;
 
-  return <Comp {...props} />;
+  return Comp;
 };
 
 export default createComponent;

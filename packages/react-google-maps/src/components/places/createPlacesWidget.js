@@ -5,7 +5,7 @@ import { noop } from '../../internal/utils';
 import EventHandler, { getHandlerName } from '../../internal/EventHandler';
 import OptionsHandler from '../../internal/OptionsHandler';
 
-const createPlacesWidget = (type, evtNames, propertyNames) => props => {
+const createPlacesWidget = (type, evtNames, propertyNames) => {
   const propTypes = {
     children: PropTypes.node,
     controlPosition: PropTypes.string,
@@ -86,7 +86,7 @@ const createPlacesWidget = (type, evtNames, propertyNames) => props => {
   Widget.propTypes = propTypes;
   Widget.defaultProps = defaultProps;
 
-  return <Widget {...props} />;
+  return Widget;
 };
 
 export default createPlacesWidget;
