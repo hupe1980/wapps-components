@@ -10,14 +10,14 @@
     "react"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
   "dependencies": {
-    "@wapps/react-scroll": "^0.0.6",
+    "@wapps/react-scroll": "^0.0.7",
     "aws-sdk": "^2.243.1",
     "hoist-non-react-statics": "^2.5.0",
     "prop-types": "^15.6.1",
