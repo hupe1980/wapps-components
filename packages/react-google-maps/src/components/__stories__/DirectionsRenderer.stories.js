@@ -78,25 +78,19 @@ storiesOf('react-google-maps|DirectionsRenderer', module)
   ))
   .add('with two renderer', () => (
     <Api>
-      <DirectionsRenderer
-        request={{
-          origin: 'penn station, new york, ny',
-          destination: '260 Broadway New York NY 10007',
-          travelMode: 'driving',
+      <div
+        style={{
+          height: '100vh',
+          width: '100wh',
+          display: 'flex',
+          flexDirection: 'row',
         }}
       >
-        <div
-          id="panel"
-          style={{
-            height: '100vh',
-            float: 'right',
-            width: '390px',
-            overflow: 'auto',
-          }}
-        />
-      </DirectionsRenderer>
-      <div style={{ height: '100vh', marginRight: '400px' }}>
-        <Map center={{ lat: 40.771, lng: -73.974 }} zoom={13}>
+        <Map
+          center={{ lat: 40.771, lng: -73.974 }}
+          zoom={13}
+          mapDiv={<div style={{ height: '100%', width: '50%' }} />}
+        >
           <DirectionsRenderer
             request={{
               origin: 'penn station, new york, ny',
@@ -104,6 +98,23 @@ storiesOf('react-google-maps|DirectionsRenderer', module)
               travelMode: 'driving',
             }}
           />
+          <DirectionsRenderer
+            request={{
+              origin: 'penn station, new york, ny',
+              destination: '260 Broadway New York NY 10007',
+              travelMode: 'driving',
+            }}
+          >
+            <div
+              id="panel"
+              style={{
+                height: '100%',
+                marginLeft: '10px',
+                width: '50%',
+                overflow: 'auto',
+              }}
+            />
+          </DirectionsRenderer>
         </Map>
       </div>
     </Api>

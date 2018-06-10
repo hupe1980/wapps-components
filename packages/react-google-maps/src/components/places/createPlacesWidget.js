@@ -7,14 +7,15 @@ import OptionsHandler from '../../internal/OptionsHandler';
 
 const createPlacesWidget = (type, evtNames, propertyNames) => props => {
   const propTypes = {
-    children: PropTypes.node.isRequired,
-    entityRef: PropTypes.func,
+    children: PropTypes.node,
     controlPosition: PropTypes.string,
+    entityRef: PropTypes.func,
   };
 
   const defaultProps = {
-    entityRef: noop,
+    children: <input type="text" />,
     controlPosition: 'TOP',
+    entityRef: noop,
   };
 
   evtNames.forEach(name => {

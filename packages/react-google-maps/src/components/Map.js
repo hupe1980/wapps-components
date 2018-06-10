@@ -68,12 +68,14 @@ const propTypes = {
   /** The initial Map center. */
   center: PropTypes.object.isRequired,
   /** The initial Map zoom level. */
+  mapDiv: PropTypes.node,
   zoom: PropTypes.number.isRequired,
   entityRef: PropTypes.func,
 };
 
 const defaultProps = {
   entityRef: noop,
+  mapDiv: <div style={{ height: '100%' }} role="application" />,
 };
 
 evtNames.forEach(name => {
@@ -129,13 +131,13 @@ class Map extends Component {
 
   render() {
     const { map } = this.state;
-    const { children } = this.props;
+    const { children, mapDiv } = this.props;
 
     return (
       <MapContext.Provider value={map}>
-        <div style={{ height: '100%' }} ref={this.nodeRef} role="application">
-          Loading map...
-        </div>
+        {React.cloneElement(mapDiv, {
+          ref: this.nodeRef,
+        })}
         {map && children}
       </MapContext.Provider>
     );

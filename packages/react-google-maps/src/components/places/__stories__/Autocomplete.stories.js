@@ -65,4 +65,16 @@ storiesOf('react-google-maps.places|Autocomplete', module)
         </Autocomplete>
       </div>
     </Api>
+  ))
+  .add('without children', () => (
+    <Api>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Autocomplete
+          onPlaceChanged={autocomplete => {
+            const place = autocomplete.getPlace();
+            alert(JSON.stringify(place));
+          }}
+        />
+      </div>
+    </Api>
   ));

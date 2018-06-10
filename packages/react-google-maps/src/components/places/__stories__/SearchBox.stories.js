@@ -17,20 +17,57 @@ const styles = {
   boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
 };
 
-storiesOf('react-google-maps.places|SearchBox', module).add('default', () => (
-  <Api>
-    <Container>
-      <Map
-        center={{
-          lat: 52.520008,
-          lng: 13.404954,
-        }}
-        zoom={10}
-      >
-        <SearchBox>
+storiesOf('react-google-maps.places|SearchBox', module)
+  .add('default', () => (
+    <Api>
+      <Container>
+        <Map
+          center={{
+            lat: 52.520008,
+            lng: 13.404954,
+          }}
+          zoom={10}
+        >
+          <SearchBox>
+            <input type="text" style={styles} />
+          </SearchBox>
+        </Map>
+      </Container>
+    </Api>
+  ))
+  .add('without Map', () => (
+    <Api>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <SearchBox
+          onPlacesChanged={searchBox => {
+            const places = searchBox.getPlaces();
+
+            if (places.length === 0) {
+              return;
+            }
+
+            alert(JSON.stringify(places));
+          }}
+        >
           <input type="text" style={styles} />
         </SearchBox>
-      </Map>
-    </Container>
-  </Api>
-));
+      </div>
+    </Api>
+  ))
+  .add('without children', () => (
+    <Api>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <SearchBox
+          onPlacesChanged={searchBox => {
+            const places = searchBox.getPlaces();
+
+            if (places.length === 0) {
+              return;
+            }
+
+            alert(JSON.stringify(places));
+          }}
+        />
+      </div>
+    </Api>
+  ));
