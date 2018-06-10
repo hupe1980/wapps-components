@@ -7,6 +7,7 @@ import OptionsHandler from '../../internal/OptionsHandler';
 
 const createPlacesWidget = (type, evtNames, propertyNames) => props => {
   const propTypes = {
+    children: PropTypes.node.isRequired,
     entityRef: PropTypes.func,
     controlPosition: PropTypes.string,
   };

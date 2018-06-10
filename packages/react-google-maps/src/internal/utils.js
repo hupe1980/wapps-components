@@ -28,24 +28,56 @@ export const isEmpty = value => {
   return false;
 };
 
-export const isEqual = (a, b) => {
-  if (a === b) return true;
+const compare = (value, other) => {
+  const type = Object.prototype.toString.call(value);
 
-  if (React.isValidElement(a) || React.isValidElement(b)) {
-    return a === b;
+  if (['[object Array]', '[object Object]'].includes(type)) {
+    if (!isEqual(value, other)) return false;
+    return true;
+  } else {
+    if (type !== Object.prototype.toString.call(other)) return false;
+    if (value !== other) return false;
+    return true;
+  }
+};
+
+export const isEqual = (value, other) => {
+  if (value === other) return true;
+
+  if (React.isValidElement(value) || React.isValidElement(other)) {
+    return value === other;
   }
 
-  if (a && b && isFunction(a.equals)) return a.equals(b);
+  if (value && other && isFunction(value.equals)) {
+    return value.equals(other);
+  }
 
-  if (isObject(a) && isObject(b)) {
-    if (Object.keys(a).length !== Object.keys(b).length) return false;
+  const type = Object.prototype.toString.call(value);
 
-    Object.keys(a).forEach(key => {
-      if (!isEqual(a[key], b[key])) {
-        return false;
+  if (type !== Object.prototype.toString.call(other)) return false;
+
+  const valueLen =
+    type === '[object Array]' ? value.length : Object.keys(value).length;
+  const otherLen =
+    type === '[object Array]' ? other.length : Object.keys(other).length;
+
+  if (valueLen !== otherLen) return false;
+
+  if (type === '[object Array]') {
+    for (let i = 0; i < valueLen; i++) {
+      if (!compare(value[i], other[i])) return false;
+    }
+    return true;
+  }
+
+  if (type === '[object Object]') {
+    for (let key in value) {
+      if (value.hasOwnProperty(key)) {
+        if (!compare(value[key], other[key])) return false;
       }
-    });
+    }
+    return true;
   }
 
-  return a === b;
+  return value === other;
 };

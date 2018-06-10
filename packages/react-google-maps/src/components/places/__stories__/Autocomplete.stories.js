@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import { Api, Container } from './helper';
 import Map from '../../Map';
-import Automcomplete from '../Autocomplete';
+import Autocomplete from '../Autocomplete';
 
 const styles = {
   width: '50%',
@@ -17,7 +17,7 @@ const styles = {
   boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
 };
 
-storiesOf('react-google-maps.places|Automcomplete', module)
+storiesOf('react-google-maps.places|Autocomplete', module)
   .add('default', () => (
     <Api>
       <Container>
@@ -28,9 +28,9 @@ storiesOf('react-google-maps.places|Automcomplete', module)
           }}
           zoom={10}
         >
-          <Automcomplete>
+          <Autocomplete>
             <input type="text" style={styles} />
-          </Automcomplete>
+          </Autocomplete>
         </Map>
       </Container>
     </Api>
@@ -45,9 +45,9 @@ storiesOf('react-google-maps.places|Automcomplete', module)
           }}
           zoom={10}
         >
-          <Automcomplete controlPosition="TOP_LEFT">
+          <Autocomplete controlPosition="TOP_LEFT">
             <input type="text" style={styles} />
-          </Automcomplete>
+          </Autocomplete>
         </Map>
       </Container>
     </Api>
@@ -55,14 +55,14 @@ storiesOf('react-google-maps.places|Automcomplete', module)
   .add('without Map', () => (
     <Api>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Automcomplete
+        <Autocomplete
           onPlaceChanged={autocomplete => {
             const place = autocomplete.getPlace();
             alert(JSON.stringify(place));
           }}
         >
           <input type="text" style={styles} />
-        </Automcomplete>
+        </Autocomplete>
       </div>
     </Api>
   ));
