@@ -3,20 +3,11 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import { noop } from '../internal/utils';
-import EventHandler from '../internal/EventHandler';
+import EventHandler, { getHandlerName } from '../internal/EventHandler';
 import OptionsHandler from '../internal/OptionsHandler';
 import { withMapContext } from './Context';
 
-/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/info-window?hl=de */
-const propTypes = {
-  entityRef: PropTypes.func,
-  children: PropTypes.node.isRequired,
-};
-
-const defaultProps = {
-  entityRef: noop,
-};
-
+/** @see https://developers.google.com/maps/documentation/javascript/reference/3.exp/info-window?hl=de */
 const evtNames = [
   'closeclick',
   'content_changed',
@@ -26,6 +17,20 @@ const evtNames = [
 ];
 
 const propertyNames = ['content', 'options', 'position', 'zIndex'];
+
+const propTypes = {
+  entityRef: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
+
+const defaultProps = {
+  entityRef: noop,
+};
+
+evtNames.forEach(name => {
+  const handlerName = getHandlerName(name);
+  propTypes[handlerName] = PropTypes.func;
+});
 
 class InfoWindow extends Component {
   constructor(props) {

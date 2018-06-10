@@ -2,22 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { noop } from '../internal/utils';
-import EventHandler from '../internal/EventHandler';
+import EventHandler, { getHandlerName } from '../internal/EventHandler';
 import OptionsHandler from '../internal/OptionsHandler';
 import { withMapContext } from './Context';
-
-const propTypes = {
-  /** Which animation to play when marker is added to a map. */
-  animation: PropTypes.oneOf(['bounce', 'drop']),
-  /** Marker position. */
-  position: PropTypes.object.isRequired,
-  entityRef: PropTypes.func,
-  children: PropTypes.node,
-};
-
-const defaultProps = {
-  entityRef: noop,
-};
 
 const evtNames = [
   'animation_changed',
@@ -61,6 +48,24 @@ const propertyNames = [
   'visible',
   'zIndex',
 ];
+
+const propTypes = {
+  /** Which animation to play when marker is added to a map. */
+  animation: PropTypes.oneOf(['bounce', 'drop']),
+  /** Marker position. */
+  position: PropTypes.object.isRequired,
+  entityRef: PropTypes.func,
+  children: PropTypes.node,
+};
+
+const defaultProps = {
+  entityRef: noop,
+};
+
+evtNames.forEach(name => {
+  const handlerName = getHandlerName(name);
+  propTypes[handlerName] = PropTypes.func;
+});
 
 class Marker extends Component {
   constructor(props) {

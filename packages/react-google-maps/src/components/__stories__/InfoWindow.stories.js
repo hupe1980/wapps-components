@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import withState from '@wapps/storybook-addon-state';
 
 import { Api, Container } from './helper';
 import Map from '../Map';
@@ -111,4 +112,35 @@ storiesOf('react-google-maps|InfoWindow', module)
         </Map>
       </Container>
     </Api>
-  ));
+  ))
+  .add(
+    'with state',
+    withState({ open: true })(({ store }) => (
+      <Api>
+        <Container>
+          <Map
+            center={{
+              lat: 52.520008,
+              lng: 13.404954,
+            }}
+            zoom={15}
+          >
+            <Marker
+              position={{
+                lat: 52.520008,
+                lng: 13.404954,
+              }}
+              onClick={() => store.set({ open: true })}
+            >
+              <InfoWindow
+                open={store.state.open}
+                onCloseclick={() => store.set({ open: false })}
+              >
+                <div>Close the infowindow an click the marker!</div>
+              </InfoWindow>
+            </Marker>
+          </Map>
+        </Container>
+      </Api>
+    )),
+  );

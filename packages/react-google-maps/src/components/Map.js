@@ -6,7 +6,7 @@ import EventHandler, { getHandlerName } from '../internal/EventHandler';
 import OptionsHandler from '../internal/OptionsHandler';
 import { MapContext, withGoogleMapsContext } from './Context';
 
-/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
+/** @see https://developers.google.com/maps/documentation/javascript/reference/3.exp/map?hl=de */
 const evtNames = [
   'bounds_changed',
   'center_changed',
@@ -79,7 +79,6 @@ const defaultProps = {
 evtNames.forEach(name => {
   const handlerName = getHandlerName(name);
   propTypes[handlerName] = PropTypes.func;
-  defaultProps[handlerName] = noop;
 });
 
 class Map extends Component {

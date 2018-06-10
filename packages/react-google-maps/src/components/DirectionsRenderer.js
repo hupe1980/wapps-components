@@ -7,7 +7,7 @@ import { noop, compose } from '../internal/utils';
 import withDirectionsService from './withDirectionsService';
 import { withMapContext } from './Context';
 
-/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/directions?hl=de#DirectionsRenderer */
+/** @see https://developers.google.com/maps/documentation/javascript/reference/3.exp/directions?hl=de#DirectionsRenderer */
 const evtNames = ['directions_changed'];
 
 const propertyNames = [
@@ -38,7 +38,6 @@ const defaultProps = {
 evtNames.forEach(name => {
   const handlerName = getHandlerName(name);
   propTypes[handlerName] = PropTypes.func;
-  defaultProps[handlerName] = noop;
 });
 
 class DirectionsRenderer extends Component {

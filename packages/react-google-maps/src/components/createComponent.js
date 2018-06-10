@@ -17,7 +17,6 @@ const createComponent = (type, evtNames, propertyNames) => props => {
   evtNames.forEach(name => {
     const handlerName = getHandlerName(name);
     propTypes[handlerName] = PropTypes.func;
-    defaultProps[handlerName] = noop;
   });
 
   class Comp extends Component {

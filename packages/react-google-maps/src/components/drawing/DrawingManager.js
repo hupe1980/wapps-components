@@ -3,18 +3,10 @@ import PropTypes from 'prop-types';
 
 import { withMapContext } from '../Context';
 import { noop } from '../../internal/utils';
-import EventHandler from '../../internal/EventHandler';
+import EventHandler, { getHandlerName } from '../../internal/EventHandler';
 import OptionsHandler from '../../internal/OptionsHandler';
 
-/** https://developers.google.com/maps/documentation/javascript/reference/3.exp/drawing?hl=de#DrawingManager */
-const propTypes = {
-  entityRef: PropTypes.func,
-};
-
-const defaultProps = {
-  entityRef: noop,
-};
-
+/** @see https://developers.google.com/maps/documentation/javascript/reference/3.exp/drawing?hl=de#DrawingManager */
 const evtNames = [
   'circlecomplete',
   'markercomplete',
@@ -25,6 +17,19 @@ const evtNames = [
 ];
 
 const propertyNames = ['drawingMode', 'map', 'options'];
+
+const propTypes = {
+  entityRef: PropTypes.func,
+};
+
+const defaultProps = {
+  entityRef: noop,
+};
+
+evtNames.forEach(name => {
+  const handlerName = getHandlerName(name);
+  propTypes[handlerName] = PropTypes.func;
+});
 
 class DrawingManager extends Component {
   constructor(props) {

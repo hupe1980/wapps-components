@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { noop } from '../../internal/utils';
-import EventHandler from '../../internal/EventHandler';
+import EventHandler, { getHandlerName } from '../../internal/EventHandler';
 import OptionsHandler from '../../internal/OptionsHandler';
 
 const createPlacesWidget = (type, evtNames, propertyNames) => props => {
@@ -16,6 +16,11 @@ const createPlacesWidget = (type, evtNames, propertyNames) => props => {
     entityRef: noop,
     controlPosition: 'TOP',
   };
+
+  evtNames.forEach(name => {
+    const handlerName = getHandlerName(name);
+    propTypes[handlerName] = PropTypes.func;
+  });
 
   class Widget extends Component {
     constructor(props) {

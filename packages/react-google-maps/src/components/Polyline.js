@@ -1,7 +1,7 @@
 import createComponent from './createComponent';
 import { withMapContext } from './Context';
 
-/** see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Polyline */
+/** @see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Polyline */
 const evtNames = [
   'click',
   'dblclick',

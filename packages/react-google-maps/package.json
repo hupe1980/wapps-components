@@ -40,7 +40,8 @@
     "prop-types": "^15.6.1"
   },
   "devDependencies": {
-    "@wapps/jest-google-maps-mock": "^0.0.6"
+    "@wapps/jest-google-maps-mock": "^0.0.6",
+    "@wapps/storybook-addon-state": "^0.0.1"
   },
   "peerDependencies": {
     "react": "^16.4.0",

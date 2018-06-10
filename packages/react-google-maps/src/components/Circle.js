@@ -1,8 +1,7 @@
-import React from 'react';
 import createComponent from './createComponent';
 import { withMapContext } from './Context';
 
-/** https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Circle */
+/** @see https://developers.google.com/maps/documentation/javascript/reference/3.exp/polygon?hl=de#Circle */
 const evtNames = [
   'center_changed',
   'click',

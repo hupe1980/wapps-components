@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 import withScriptLoader from '@wapps/react-script-loader';
@@ -30,12 +30,21 @@ const getAttributes = ({ key, libraries, version, url, ...attributes }) => {
 };
 
 const withGoogleMapsApi = WrappedComponent => {
-  const GoogleMapsApi = props => {
-    const { api, ...rest } = props;
-    const Component = withScriptLoader(getAttributes(api))(WrappedComponent);
+  class GoogleMapsApi extends Component {
+    constructor(props) {
+      super(props);
 
-    return <Component {...rest} />;
-  };
+      const { api } = props;
+      this.component = withScriptLoader(getAttributes(api))(WrappedComponent);
+    }
+
+    render() {
+      const { api, ...rest } = this.props;
+      const Api = this.component;
+
+      return <Api {...rest} />;
+    }
+  }
 
   const name =
     WrappedComponent.displayName || WrappedComponent.name || 'Component';
