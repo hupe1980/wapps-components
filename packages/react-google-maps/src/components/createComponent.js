@@ -8,10 +8,12 @@ import { noop } from '../internal/utils';
 const createComponent = (type, evtNames, propertyNames) => props => {
   const propTypes = {
     entityRef: PropTypes.func,
+    visible: PropTypes.bool,
   };
 
   const defaultProps = {
     entityRef: noop,
+    visible: true,
   };
 
   evtNames.forEach(name => {
@@ -36,11 +38,19 @@ const createComponent = (type, evtNames, propertyNames) => props => {
     }
 
     componentDidUpdate(prevProps) {
+      const { map, visible } = this.props;
+
       this.optionsHandler.updateOptionsFormProps(this.props, prevProps);
+
+      console.log(visible, prevProps.visible, 'TTTT');
+
+      if (visible !== prevProps.visible) {
+        visible ? this.comp.setMap(map) : this.comp.setMap(null);
+      }
     }
 
     createComp = () => {
-      const { googleMaps, entityRef, ...rest } = this.props;
+      const { googleMaps, entityRef, map, visible, ...rest } = this.props;
 
       this.comp = new googleMaps[type]();
 
@@ -55,6 +65,10 @@ const createComponent = (type, evtNames, propertyNames) => props => {
 
       this.eventHandler = new EventHandler(googleMaps, this.comp);
       this.eventHandler.addListenersFromProps(this.props, evtNames);
+
+      if (visible) {
+        this.comp.setMap(map);
+      }
 
       entityRef(this.comp);
     };

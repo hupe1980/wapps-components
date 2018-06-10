@@ -4,20 +4,30 @@ import withState from '@wapps/storybook-addon-state';
 
 import { Api, Container, RemoveRestorePanel } from './helper';
 import Map from '../Map';
-import BicyclingLayer from '../BicyclingLayer';
+import GroundOverlay from '../GroundOverlay';
 
-storiesOf('react-google-maps|BicyclingLayer', module)
+const imageBounds = {
+  north: 40.773941,
+  south: 40.712216,
+  east: -74.12544,
+  west: -74.22655,
+};
+
+storiesOf('react-google-maps|GroundOverlay', module)
   .add('default', () => (
     <Api>
       <Container>
         <Map
           center={{
-            lat: 52.520008,
-            lng: 13.404954,
+            lat: 40.74,
+            lng: -74.18,
           }}
           zoom={13}
         >
-          <BicyclingLayer />
+          <GroundOverlay
+            url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+            bounds={imageBounds}
+          />
         </Map>
       </Container>
     </Api>
@@ -33,12 +43,16 @@ storiesOf('react-google-maps|BicyclingLayer', module)
           />
           <Map
             center={{
-              lat: 52.520008,
-              lng: 13.404954,
+              lat: 40.74,
+              lng: -74.18,
             }}
             zoom={13}
           >
-            <BicyclingLayer visible={store.state.visible} />
+            <GroundOverlay
+              visible={store.state.visible}
+              url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+              bounds={imageBounds}
+            />
           </Map>
         </Container>
       </Api>

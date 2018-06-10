@@ -1,4 +1,6 @@
 # react-scroll
+[![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
+
 React scroll compoment
 
 ## Example

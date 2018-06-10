@@ -1,4 +1,6 @@
 # react-google-maps
+[![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
+
 React google maps component
 
 ## Example

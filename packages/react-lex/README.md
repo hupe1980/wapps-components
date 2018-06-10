@@ -1,4 +1,6 @@
 # react-lex
+[![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
+
 This is a React Amazon Lex interface. It provides a chatbot UI component that can be integrated in your website. The interface allows to interact with a Lex bot directly from a browser using text.
 
 ## Example

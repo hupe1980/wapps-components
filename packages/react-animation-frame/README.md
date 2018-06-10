@@ -1,4 +1,6 @@
 # react-animation-frame
+[![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
+
 React higher-order component for managing recurring animation frames
 
 ## Example

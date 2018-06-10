@@ -13,11 +13,7 @@ describe('BicyclingLayer', () => {
     map = new googleMaps.Map();
   });
 
-  it('should create a marker and attach it to map on mount', () => {
-    const options = {
-      map,
-    };
-
+  it('should create a layer and attach it to map on mount', () => {
     mount(<BicyclingLayer googleMaps={googleMaps} map={map} />);
 
     expect(googleMaps.BicyclingLayer).toHaveBeenCalledTimes(1);
@@ -25,7 +21,9 @@ describe('BicyclingLayer', () => {
     expect(googleMaps.BicyclingLayer).toHaveBeenLastCalledWith();
 
     const layer = googleMaps.BicyclingLayer.mock.instances[0];
+    expect(layer.setMap).toHaveBeenCalledTimes(1);
+    expect(layer.setMap).toHaveBeenLastCalledWith(map);
     expect(layer.setValues).toHaveBeenCalledTimes(1);
-    expect(layer.setValues).toHaveBeenLastCalledWith(options);
+    expect(layer.setMap).toHaveBeenLastCalledWith(map);
   });
 });
