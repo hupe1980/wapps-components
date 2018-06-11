@@ -79,7 +79,7 @@ class InfoWindow extends Component {
   };
 
   createInfoWindow = () => {
-    const { googleMaps, open, options, entityRef, ...rest } = this.props;
+    const { googleMaps, open, entityRef, ...rest } = this.props;
 
     this.infoWindow = new googleMaps.InfoWindow();
 
@@ -90,7 +90,6 @@ class InfoWindow extends Component {
     );
     this.optionsHandler.setOptions({
       content: this.containerElement,
-      ...options,
       ...rest,
     });
 
