@@ -3,7 +3,7 @@
   "description": "Jest google maps mock",
   "repository": "hupe1980/wapps-components",
   "author": "hello@webappsolutions.de",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "lib/index.js",
   "license": "MIT",
   "files": [
