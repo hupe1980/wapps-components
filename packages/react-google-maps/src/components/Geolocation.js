@@ -7,12 +7,14 @@ import { noop } from '../internal/utils';
 const propTypes = {
   map: PropTypes.object.isRequired,
   onError: PropTypes.func,
-  usePanTo: PropTypes.bool,
+  onFound: PropTypes.func,
 };
 
 const defaultProps = {
   onError: noop,
-  usePanTo: true,
+  onFound: (currentPosition, map) => {
+    map.panTo(currentPosition);
+  },
 };
 
 class Geolocation extends Component {
@@ -27,13 +29,13 @@ class Geolocation extends Component {
   }
 
   handleLocationFound = position => {
-    const { map, usePanTo } = this.props;
+    const { map, onFound } = this.props;
     const currentPosition = {
       lat: position.coords.latitude,
       lng: position.coords.longitude,
     };
 
-    usePanTo ? map.panTo(currentPosition) : map.setCenter(currentPosition);
+    onFound(currentPosition, map);
   };
 
   handleLocationError = browserHasGeolocation => {

@@ -32,8 +32,8 @@ storiesOf('react-google-maps|Geolocation', module)
           zoom={13}
         >
           <Geolocation
-            usePanTo={false}
             onError={() => alert('Geolocation failure!')}
+            onFound={(currentPosition, map) => map.setCenter(currentPosition)}
           />
         </Map>
       </Container>

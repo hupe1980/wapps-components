@@ -89,7 +89,17 @@ const createGoogleMapsMock = (libraries = []) => {
         'setStyle',
       ]);
     }),
-    DirectionsRenderer: function() {},
+    DirectionsRenderer: jest.fn().mockImplementation(function(opts) {
+      this.opts = opts;
+      createMVCObject(this);
+      createMockFuncsFromArray(this, [
+        'setDirections',
+        'setMap',
+        'setOptions',
+        'setPanel',
+        'setRouteIndex',
+      ]);
+    }),
     DirectionsService: function() {},
     DirectionsStatus: {
       INVALID_REQUEST: 'INVALID_REQUEST',
@@ -135,7 +145,11 @@ const createGoogleMapsMock = (libraries = []) => {
       REQUEST_DENIED: 'REQUEST_DENIED',
       UNKNOWN_ERROR: 'UNKNOWN_ERROR',
     },
-    FusionTablesLayer: function() {},
+    FusionTablesLayer: jest.fn().mockImplementation(function(options) {
+      this.options = options;
+      createMVCObject(this);
+      createMockFuncsFromArray(this, ['setMap', 'setOptions']);
+    }),
     Geocoder: function() {},
     GeocoderLocationType: {
       APPROXIMATE: 'APPROXIMATE',
