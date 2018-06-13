@@ -500,10 +500,7 @@ exports[`Storyshots react-lex|Chat with Messages 1`] = `
         <input
           className="sc-ifAKCX cZUZpM"
           id="textInput"
-          onChange={undefined}
-          placeholder={undefined}
           type="text"
-          value={undefined}
         />
       </form>
     </div>
