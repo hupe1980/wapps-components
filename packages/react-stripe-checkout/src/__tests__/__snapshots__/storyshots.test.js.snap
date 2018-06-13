@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots react-stripe-checkout|StripeCheckout default 1`] = `
+<button
+  onClick={[Function]}
+>
+  Purchase
+</button>
+`;
+
+exports[`Storyshots react-stripe-checkout|StripeCheckout with custom button 1`] = `
+<button
+  onClick={[Function]}
+>
+  Custom
+</button>
+`;
