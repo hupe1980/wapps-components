@@ -1,16 +1,16 @@
 import React from 'react';
 
-const GoogleMapsContext = React.createContext(null);
+export const GoogleMapsContext = React.createContext(null);
 
-const MapContext = React.createContext(null);
+export const MapContext = React.createContext(null);
 
-const withGoogleMapsContext = Component => props => (
+export const withGoogleMapsContext = Component => props => (
   <GoogleMapsContext.Consumer>
     {googleMaps => <Component googleMaps={googleMaps} {...props} />}
   </GoogleMapsContext.Consumer>
 );
 
-const withMapContext = Component => props => (
+export const withMapContext = Component => props => (
   <GoogleMapsContext.Consumer>
     {googleMaps => (
       <MapContext.Consumer>
@@ -19,5 +19,3 @@ const withMapContext = Component => props => (
     )}
   </GoogleMapsContext.Consumer>
 );
-
-export { GoogleMapsContext, withGoogleMapsContext, MapContext, withMapContext };

@@ -1,0 +1,28 @@
+{
+  "name": "@wapps/react-contentful",
+  "description": "React contentful components",
+  "repository": "hupe1980/wapps-components",
+  "keywords": [
+    "react",
+    "contentful"
+  ],
+  "author": "hello@webappsolutions.de",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "files": [
+    "lib/**"
+  ],
+  "dependencies": {
+    "contentful": "^6.1.1",
+    "hoist-non-react-statics": "^2.5.0",
+    "prop-types": "^15.6.1"
+  },
+  "peerDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -32,6 +32,7 @@
   "files": [
     "drawing.js",
     "places.js",
+    "visualization.js",
     "lib/**"
   ],
   "dependencies": {
