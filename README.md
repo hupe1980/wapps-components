@@ -1,5 +1,5 @@
 # wapps-components
-[![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components) [![Greenkeeper badge](https://badges.greenkeeper.io/hupe1980/wapps-components.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components) [![Greenkeeper badge](https://badges.greenkeeper.io/hupe1980/wapps-components.svg)](https://greenkeeper.io/) [![codecov](https://codecov.io/gh/hupe1980/wapps-components/branch/master/graph/badge.svg)](https://codecov.io/gh/hupe1980/wapps-components)
 
 React components
 
