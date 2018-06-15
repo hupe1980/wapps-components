@@ -62,16 +62,17 @@ class StripeCheckout extends Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.handler) {
+      this.handler.close();
+    }
+  }
+
   createHandler = () => {
     const { apiKey } = this.props;
 
     this.handler = window.StripeCheckout.configure({
       key: apiKey,
-    });
-
-    //Close Checkout on page navigation
-    window.addEventListener('popstate', () => {
-      this.handler.close();
     });
   };
 
