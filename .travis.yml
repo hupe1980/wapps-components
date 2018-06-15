@@ -10,6 +10,7 @@ script:
   - yarn --version
   - yarn run build
   - yarn run test
+  - yarn run coverage 
 
 cache:
   yarn: true
