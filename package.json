@@ -71,7 +71,7 @@
       }
     },
     "collectCoverageFrom": [
-      "packages/**/*.js"
+      "packages/*/src/**/*.js"
     ]
   }
 }
