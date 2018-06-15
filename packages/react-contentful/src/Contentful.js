@@ -26,7 +26,7 @@ const propTypes = {
 
 const defaultProps = {
   environment: 'master',
-  insecure: true,
+  insecure: false,
   host: 'cdn.contentful.com',
   basePath: '',
   httpAgent: undefined,
