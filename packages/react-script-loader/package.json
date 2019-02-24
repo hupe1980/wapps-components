@@ -13,7 +13,7 @@
     "lib/**"
   ],
   "dependencies": {
-    "hoist-non-react-statics": "^2.5.0"
+    "hoist-non-react-statics": "^3.0.0"
   },
   "peerDependencies": {
     "react": ">=16"
