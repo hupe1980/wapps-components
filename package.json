@@ -3,6 +3,7 @@
   "name": "wapps-components",
   "license": "MIT",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "build": "lerna exec --parallel -- BABEL_ENV=build babel src -d lib --root-mode upward --delete-dir-on-start",
     "build:watch": "lerna exec --parallel -- BABEL_ENV=build babel src -d lib  --root-mode upward --watch --delete-dir-on-start",
     "clean": "lerna clean",
