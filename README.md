@@ -8,7 +8,7 @@
 
 This repository is a monorepo managed with [Lerna](https://github.com/lerna/lerna). [Several packages](/packages) are published to npm from the same codebase.
 
-| Component                                                | Description                                                          |
+| Package                                                  | Description                                                          |
 | -------------------------------------------------------- | -------------------------------------------------------------------- |
 | [react-google-maps](/packages/react-google-maps)         | React google maps components                                         |
 | [jest-google-maps-mock](/packages/jest-google-maps-mock) | Jest google maps mock                                                |
