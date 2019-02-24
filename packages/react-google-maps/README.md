@@ -33,6 +33,44 @@ const App = () => (
 export default App;
 ```
 
+### Marker
+
+```javascript
+...
+  <Map
+    center={{
+      lat: 52.520008,
+      lng: 13.404954,
+    }}
+    zoom={15}
+  >
+    <Marker
+      position={{
+        lat: 52.520008,
+        lng: 13.404954,
+      }}
+      onClick={() => console.log('Click')}
+    />
+  </Map>
+...
+```
+
+### TrafficLayer
+
+```javascript
+...
+  <Map
+    center={{
+      lat: 52.520008,
+      lng: 13.404954,
+    }}
+    zoom={15}
+  >
+    <TrafficLayer autoRefresh />
+  </Map>
+...
+```
+
 ## Live Demo
 
 For a demo, check out https://hupe1980.github.io/wapps-components/
