@@ -200,6 +200,9 @@ const createGoogleMapsMock = (libraries = []) => {
         'setStreetView',
         'setTilt',
         'setZoom',
+        'fitBounds',
+        'getBounds',
+        'panToBounds'
       ]);
     }),
     MapTypeControlStyle: {
