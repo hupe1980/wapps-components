@@ -1,9 +1,17 @@
 # storybook-addon-state
+
 [![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
 
-Storybook addon to manage state
+> Storybook addon to manage state
 
-## Example
+## Installation
+
+```bash
+npm install --save @wapps/storybook-addon-state
+```
+
+## How to use
+
 ```js
 import React from 'react';
 import { storiesOf } from '@storybook/react';
@@ -48,7 +56,9 @@ storiesOf('storybook-addon-state|State', module).add('default', () => (
 ```
 
 ## Live Demo
+
 For a demo, check out https://hupe1980.github.io/wapps-components/
 
-## Installation
-- `npm install --save @wapps/storybook-addon-state`
+## License
+
+[MIT](../../LICENSE)

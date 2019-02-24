@@ -1,9 +1,17 @@
 # react-script-loader
+
 [![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
 
-React script loader
+> React script loader
 
-## Example
+## Installation
+
+```bash
+npm install --save @wapps/react-script-loader
+```
+
+## How to use
+
 ```js
 import React, { Component } from 'react';
 import withScriptLoader from '@wapps/react-script-loader';
@@ -39,5 +47,6 @@ export default withScriptLoader({
 })(GoogleMaps)
 ```
 
-## Installation
-- `npm install --save @wapps/react-script-loader`
+## License
+
+[MIT](../../LICENSE)

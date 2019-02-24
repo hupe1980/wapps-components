@@ -1,3 +1,4 @@
+import requireContext from 'require-context.macro';
 import { configure, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 
@@ -11,7 +12,7 @@ setOptions({
 });
 
 const loadStories = () => {
-  const req = require.context('../packages', true, /\.stories\.js$/);
+  const req = requireContext('../packages', true, /\.stories\.js$/);
   req.keys().forEach(filename => req(filename));
 };
 

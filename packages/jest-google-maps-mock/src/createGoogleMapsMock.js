@@ -202,7 +202,7 @@ const createGoogleMapsMock = (libraries = []) => {
         'setZoom',
         'fitBounds',
         'getBounds',
-        'panToBounds'
+        'panToBounds',
       ]);
     }),
     MapTypeControlStyle: {

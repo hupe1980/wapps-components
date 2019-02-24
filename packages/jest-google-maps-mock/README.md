@@ -1,9 +1,17 @@
 # jest-google-maps-mock
+
 [![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
 
-Jest google maps mock
+> Jest google maps mock
 
-## Example
+## Installation
+
+```bash
+npm install --save-dev @wapps/jest-google-maps-mock
+```
+
+## How to use
+
 ```js
 import createGoogleMapsMock from '@wapps/jest-google-maps-mock';
 
@@ -25,5 +33,6 @@ describe('createGoogleMapsMock', () => {
 });
 ```
 
-## Installation
-- `npm install --save-dev @wapps/jest-google-maps-mock`
+## License
+
+[MIT](../../LICENSE)

@@ -1,9 +1,17 @@
 # react-scroll
+
 [![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
 
-React scroll compoment
+> React scroll compoment
 
-## Example
+## Installation
+
+```bash
+npm install --save @wapps/react-scroll
+```
+
+## How to use
+
 ```js
 import React from 'react';
 import Scroll from '@wapps/react-scroll';
@@ -22,7 +30,9 @@ export default App;
 ```
 
 ## Live Demo
+
 For a demo, check out https://hupe1980.github.io/wapps-components/
 
-## Installation
-- `npm install --save @wapps/react-scroll`
+## License
+
+[MIT](../../LICENSE)

@@ -1,6 +1,8 @@
 {
-  "lerna": "2.8.0",
+  "npmClient": "npm",
+  "packages": ["packages/*"],
   "version": "independent",
-  "npmClient": "yarn",
-  "useWorkspaces": true
+  "publishConfig": {
+    "access": "public"
+  }
 }

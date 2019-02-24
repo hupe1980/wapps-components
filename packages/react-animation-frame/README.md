@@ -1,9 +1,17 @@
 # react-animation-frame
+
 [![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
 
-React higher-order component for managing recurring animation frames
+> React higher-order component for managing recurring animation frames
 
-## Example
+## Installation
+
+```bash
+npm install --save @wapps/react-animation-frame
+```
+
+## How to use
+
 ```js
 import React, { Component } from 'react';
 import withAnimationFrame from '@wapps/react-animation-frame';
@@ -18,7 +26,7 @@ class Loop extends Component {
 
   onAnimationFrame(time) {
     const { duration } = this.props;
-    const progress = (time - this.startTime) / duration * 100;
+    const progress = ((time - this.startTime) / duration) * 100;
 
     if (progress >= 100) {
       this.startTime = performance.now();
@@ -44,8 +52,10 @@ class Loop extends Component {
 export default withAnimationFrame(Loop);
 ```
 
-## Installation
-- `npm install --save @wapps/react-animation-frame`
-
 ## Live Demo
+
 For a demo, check out https://hupe1980.github.io/wapps-components/
+
+## License
+
+[MIT](../../LICENSE)
