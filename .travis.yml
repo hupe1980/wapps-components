@@ -7,17 +7,13 @@ node_js:
 
 script:
   - node --version
-  - yarn --version
-  - yarn run build
-  - yarn run test
-  - yarn run coverage 
+  - npn run build
+  - npn run test
 
 cache:
-  yarn: true
   directories:
     - "node_modules"
 
 branches:
   only:
     - master
-    - /^greenkeeper/.*$/
