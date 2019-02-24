@@ -26,7 +26,7 @@
     "TransitLayer"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
@@ -36,13 +36,13 @@
     "lib/**"
   ],
   "dependencies": {
-    "@wapps/react-script-loader": "^0.0.6",
+    "@wapps/react-script-loader": "^0.0.7",
     "hoist-non-react-statics": "^3.0.0",
     "prop-types": "^15.6.1"
   },
   "devDependencies": {
-    "@wapps/jest-google-maps-mock": "^0.0.8",
-    "@wapps/storybook-addon-state": "^0.0.3"
+    "@wapps/jest-google-maps-mock": "^0.0.9",
+    "@wapps/storybook-addon-state": "^0.0.4"
   },
   "peerDependencies": {
     "react": "^16.4.0",

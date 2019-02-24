@@ -8,14 +8,14 @@
     "checkout"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
   "dependencies": {
-    "@wapps/react-script-loader": "^0.0.6",
+    "@wapps/react-script-loader": "^0.0.7",
     "hoist-non-react-statics": "^3.0.0",
     "prop-types": "^15.6.1"
   },
