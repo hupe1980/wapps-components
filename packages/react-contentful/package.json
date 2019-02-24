@@ -14,8 +14,8 @@
     "lib/**"
   ],
   "dependencies": {
-    "contentful": "^6.1.1",
-    "hoist-non-react-statics": "^2.5.0",
+    "contentful": "^7.0.0",
+    "hoist-non-react-statics": "^3.0.0",
     "prop-types": "^15.6.1"
   },
   "peerDependencies": {
