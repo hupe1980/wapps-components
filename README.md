@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/hupe1980/wapps-components.svg?branch=master)](https://travis-ci.org/hupe1980/wapps-components)
 
-> A collection of react components
+> A collection of react components: google-maps, stripe-checkout, animation-frame, ...
 
 ## Packages
 
