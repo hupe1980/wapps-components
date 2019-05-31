@@ -8,15 +8,15 @@
     "checkout"
   ],
   "author": "hello@webappsolutions.de",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
   "dependencies": {
-    "react-script-hook": "^1.0.4",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "react-script-hook": "^1.0.4"
   },
   "peerDependencies": {
     "react": ">=16"
