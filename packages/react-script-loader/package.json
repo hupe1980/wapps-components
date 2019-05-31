@@ -1,5 +1,6 @@
 {
   "name": "@wapps/react-script-loader",
+  "private": true,
   "description": "React script loader",
   "repository": "hupe1980/wapps-components",
   "keywords": [

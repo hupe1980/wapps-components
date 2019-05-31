@@ -15,8 +15,7 @@
     "lib/**"
   ],
   "dependencies": {
-    "@wapps/react-script-loader": "^0.0.7",
-    "hoist-non-react-statics": "^3.0.0",
+    "react-script-hook": "^1.0.4",
     "prop-types": "^15.6.1"
   },
   "peerDependencies": {

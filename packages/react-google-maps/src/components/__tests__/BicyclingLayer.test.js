@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import createGoogleMapsMock from '@wapps/jest-google-maps-mock';
+import createGoogleMapsMock from 'jest-google-maps-mock';
 
 import BicyclingLayer from '../BicyclingLayer';
 

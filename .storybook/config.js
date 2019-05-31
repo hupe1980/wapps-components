@@ -1,17 +1,14 @@
 import requireContext from 'require-context.macro';
-import { configure, addDecorator } from '@storybook/react';
-import { withOptions } from '@storybook/addon-options';
+import { configure, addParameters } from '@storybook/react';
 
-addDecorator(
-  withOptions({
-    name: 'wapps-components',
-    url: 'https://github.com/hupe1980/wapps-components',
-    showAddonPanel: true,
-    showSearchBox: false,
-    hierarchySeparator: /\/|\./,
-    hierarchyRootSeparator: /\|/,
-  }),
-);
+addParameters({
+  name: 'wapps-components',
+  url: 'https://github.com/hupe1980/wapps-components',
+  showAddonPanel: true,
+  showSearchBox: false,
+  hierarchySeparator: /\/|\./,
+  hierarchyRootSeparator: /\|/,
+});
 
 const loadStories = () => {
   const req = requireContext('../packages', true, /\.stories\.js$/);

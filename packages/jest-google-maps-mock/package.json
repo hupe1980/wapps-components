@@ -1,6 +1,7 @@
 {
   "name": "@wapps/jest-google-maps-mock",
   "description": "Jest google maps mock",
+  "private": true,
   "repository": "hupe1980/wapps-components",
   "author": "hello@webappsolutions.de",
   "version": "0.0.9",

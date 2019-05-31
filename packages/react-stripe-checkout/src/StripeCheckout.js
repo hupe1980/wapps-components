@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-import withStripeCheckoutApi from './withStripeCheckoutApi';
+import useScript from 'react-script-hook';
 
 const propTypes = {
+  src: PropTypes.string,
   apiKey: PropTypes.string.isRequired,
   children: PropTypes.node,
+  LoadingIndicator: PropTypes.func,
+  ErrorIndicator: PropTypes.func,
   token: PropTypes.func,
   source: PropTypes.func,
   //Highly recommended
@@ -27,7 +29,10 @@ const propTypes = {
 };
 
 const defaultProps = {
+  src: 'https://checkout.stripe.com/checkout.js',
   children: <button>Purchase</button>,
+  LoadingIndicator: () => <h3>Loading Stripe API...</h3>,
+  ErrorIndicator: error => <h3>Failed to load Stripe API: {error.message}</h3>,
   token: undefined,
   source: undefined,
   image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -39,84 +44,55 @@ const defaultProps = {
   billingAddress: false,
 };
 
-class StripeCheckout extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handler = null;
-  }
-
-  componentDidMount() {
-    const { hasScriptsLoaded, hasScriptsLoadedSuccessfully } = this.props;
-    if (hasScriptsLoaded && hasScriptsLoadedSuccessfully) {
-      this.createHandler();
+function getOptionsFromProps(props) {
+  return [
+    'token',
+    'source',
+    'image',
+    'name',
+    'description',
+    'amount',
+    'locale',
+    'zipCode',
+    'billingAddress',
+    'currency',
+    'panelLabel',
+    'shippingAddress',
+    'email',
+    'allowRememberMe',
+    'opened',
+    'closed',
+  ].reduce((options, key) => {
+    if (props[key]) {
+      options[key] = props[key];
     }
-  }
+    return options;
+  }, {});
+}
 
-  componentDidUpdate(prevProps) {
-    const { hasScriptsLoaded, hasScriptsLoadedSuccessfully } = this.props;
-    if (hasScriptsLoaded && !prevProps.hasScriptsLoaded) {
-      if (hasScriptsLoadedSuccessfully) {
-        this.createHandler();
-      }
-    }
-  }
+export default function StripeCheckout(props) {
+  const { apiKey, src, LoadingIndicator, ErrorIndicator } = props;
+  const [loading, error] = useScript({
+    src,
+  });
 
-  componentWillUnmount() {
-    if (this.handler) {
-      this.handler.close();
-    }
-  }
+  if (loading) return <LoadingIndicator />;
+  if (error) return <ErrorIndicator error={error} />;
 
-  createHandler = () => {
-    const { apiKey } = this.props;
+  const handler = window.StripeCheckout.configure({
+    key: apiKey,
+  });
 
-    this.handler = window.StripeCheckout.configure({
-      key: apiKey,
-    });
-  };
+  const children = React.cloneElement(props.children, {
+    onClick: event => {
+      event.preventDefault();
+      const options = getOptionsFromProps(props);
+      handler.open(options);
+    },
+  });
 
-  getOptionsFromProps = () =>
-    [
-      'token',
-      'source',
-      'image',
-      'name',
-      'description',
-      'amount',
-      'locale',
-      'zipCode',
-      'billingAddress',
-      'currency',
-      'panelLabel',
-      'shippingAddress',
-      'email',
-      'allowRememberMe',
-      'opened',
-      'closed',
-    ].reduce((options, key) => {
-      if (this.props[key]) {
-        options[key] = this.props[key];
-      }
-      return options;
-    }, {});
-
-  onClick = event => {
-    const options = this.getOptionsFromProps();
-    this.handler.open(options);
-    event.preventDefault();
-  };
-
-  render() {
-    const children = React.cloneElement(this.props.children, {
-      onClick: this.onClick,
-    });
-
-    return React.Children.only(children);
-  }
+  return React.Children.only(children);
 }
 
 StripeCheckout.propTypes = propTypes;
 StripeCheckout.defaultProps = defaultProps;
-
-export default withStripeCheckoutApi(StripeCheckout);

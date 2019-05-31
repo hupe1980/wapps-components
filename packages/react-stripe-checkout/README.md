@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-npm install --save @wapps/react-stripe-checkout
+npm install @wapps/react-stripe-checkout
 ```
 
 ## How to use

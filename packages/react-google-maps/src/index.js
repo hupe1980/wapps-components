@@ -12,6 +12,5 @@ export { default as Polyline } from './components/Polyline';
 export { default as Polygon } from './components/Polygon';
 export { default as Rectangle } from './components/Rectangle';
 export { default as Circle } from './components/Circle';
-export { default as withGoogleMapsApi } from './components/withGoogleMapsApi';
 
 export default GoogleMaps;

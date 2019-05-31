@@ -1,17 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots react-stripe-checkout|StripeCheckout default 1`] = `
-<button
-  onClick={[Function]}
->
-  Purchase
-</button>
+<h3>
+  Loading Stripe API...
+</h3>
 `;
 
 exports[`Storyshots react-stripe-checkout|StripeCheckout with custom button 1`] = `
-<button
-  onClick={[Function]}
->
-  Custom
-</button>
+<h3>
+  Loading Stripe API...
+</h3>
 `;
