@@ -16,7 +16,8 @@
   "dependencies": {
     "contentful": "^7.0.0",
     "hoist-non-react-statics": "^3.0.0",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "snyk": "^1.316.1"
   },
   "peerDependencies": {
     "react": "^16.3.2",
@@ -24,5 +25,10 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
